@@ -16,7 +16,7 @@ const Contact = () => {
       {
          icon: Mail,
          title: "Email",
-         content: "senyar@usk.ac.id",
+         content: "senyar@UINAR.ac.id",
       },
       {
          icon: Clock,

@@ -43,7 +43,7 @@ export const news = [
       title: "Peluncuran Program Bantuan Semester Genap 2024",
       date: "15 Januari 2024",
       category: "Pengumuman",
-      excerpt: "Satgas Senyar USK membuka pendaftaran program bantuan untuk semester genap 2024 bagi mahasiswa yang membutuhkan.",
+      excerpt: "Siaga UIN Ar Raniry membuka pendaftaran program bantuan untuk semester genap 2024 bagi mahasiswa yang membutuhkan.",
       image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=600&fit=crop",
    },
    {
@@ -51,7 +51,7 @@ export const news = [
       title: "Workshop Keterampilan Digital untuk Mahasiswa",
       date: "8 Januari 2024",
       category: "Kegiatan",
-      excerpt: "Lebih dari 100 mahasiswa mengikuti workshop keterampilan digital yang diselenggarakan oleh Satgas Senyar USK.",
+      excerpt: "Lebih dari 100 mahasiswa mengikuti workshop keterampilan digital yang diselenggarakan oleh Siaga UIN Ar Raniry.",
       image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=600&fit=crop",
    },
    {
@@ -59,7 +59,7 @@ export const news = [
       title: "Penyaluran Bantuan Darurat Bencana Aceh",
       date: "20 Desember 2023",
       category: "Bantuan Darurat",
-      excerpt: "Satgas Senyar USK menyalurkan bantuan darurat kepada mahasiswa yang terdampak bencana di Aceh.",
+      excerpt: "Siaga UIN Ar Raniry menyalurkan bantuan darurat kepada mahasiswa yang terdampak bencana di Aceh.",
       image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=600&fit=crop",
    },
    {
@@ -83,7 +83,7 @@ export const news = [
       title: "Apresiasi Donatur dan Mitra Satgas Senyar 2023",
       date: "1 Desember 2023",
       category: "Pengumuman",
-      excerpt: "Acara apresiasi kepada seluruh donatur dan mitra yang telah mendukung program Satgas Senyar USK.",
+      excerpt: "Acara apresiasi kepada seluruh donatur dan mitra yang telah mendukung program Siaga UIN Ar Raniry.",
       image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&h=600&fit=crop",
    },
 ];
@@ -341,7 +341,7 @@ export const announcements = [
       category: "Pendaftaran",
       priority: "Penting",
       content:
-         "Satgas Senyar USK membuka pendaftaran program bantuan untuk semester genap tahun akademik 2023/2024. Pendaftaran dibuka mulai tanggal 1 Februari hingga 28 Februari 2024. Mahasiswa yang membutuhkan bantuan dapat mengisi formulir pendaftaran melalui website atau datang langsung ke sekretariat Satgas Senyar.",
+         "Siaga UIN Ar Raniry membuka pendaftaran program bantuan untuk semester genap tahun akademik 2023/2024. Pendaftaran dibuka mulai tanggal 1 Februari hingga 28 Februari 2024. Mahasiswa yang membutuhkan bantuan dapat mengisi formulir pendaftaran melalui website atau datang langsung ke sekretariat Satgas Senyar.",
       attachments: ["Formulir_Pendaftaran.pdf", "Syarat_Ketentuan.pdf"],
    },
    {
@@ -381,7 +381,7 @@ export const announcements = [
       category: "Kegiatan",
       priority: "Biasa",
       content:
-         "Satgas Senyar USK mengadakan workshop pengembangan soft skills yang terbuka untuk semua mahasiswa USK. Workshop akan diadakan pada tanggal 20 Januari 2024 di Auditorium Utama USK. Materi yang akan dibahas meliputi komunikasi efektif, leadership, dan manajemen waktu.",
+         "Siaga UIN Ar Raniry mengadakan workshop pengembangan soft skills yang terbuka untuk semua mahasiswa UINAR. Workshop akan diadakan pada tanggal 20 Januari 2024 di Auditorium Utama UINAR. Materi yang akan dibahas meliputi komunikasi efektif, leadership, dan manajemen waktu.",
       attachments: ["Agenda_Workshop.pdf", "Formulir_Pendaftaran_Workshop.pdf"],
    },
 ];
@@ -392,18 +392,18 @@ export const importantLinks = [
       id: 1,
       category: "Universitas",
       links: [
-         { name: "Website USK", url: "https://www.usk.ac.id", description: "Portal resmi Universitas Syiah Kuala" },
-         { name: "Portal Akademik USK", url: "https://portal.usk.ac.id", description: "Sistem informasi akademik mahasiswa" },
-         { name: "Perpustakaan USK", url: "https://library.usk.ac.id", description: "Perpustakaan digital dan katalog buku" },
-         { name: "E-Learning USK", url: "https://elearning.usk.ac.id", description: "Platform pembelajaran online" },
+         { name: "Website UINAR", url: "https://www.UINAR.ac.id", description: "Portal resmi Universitas Syiah Kuala" },
+         { name: "Portal Akademik UINAR", url: "https://portal.UINAR.ac.id", description: "Sistem informasi akademik mahasiswa" },
+         { name: "Perpustakaan UINAR", url: "https://library.UINAR.ac.id", description: "Perpustakaan digital dan katalog buku" },
+         { name: "E-Learning UINAR", url: "https://elearning.UINAR.ac.id", description: "Platform pembelajaran online" },
       ],
    },
    {
       id: 2,
       category: "Kemahasiswaan",
       links: [
-         { name: "BEM USK", url: "#", description: "Badan Eksekutif Mahasiswa USK" },
-         { name: "UKM USK", url: "#", description: "Unit Kegiatan Mahasiswa" },
+         { name: "BEM UINAR", url: "#", description: "Badan Eksekutif Mahasiswa UINAR" },
+         { name: "UKM UINAR", url: "#", description: "Unit Kegiatan Mahasiswa" },
          { name: "Layanan Konseling", url: "#", description: "Konseling psikologis mahasiswa" },
          { name: "Beasiswa Kemendikbud", url: "https://beasiswa.kemdikbud.go.id", description: "Informasi beasiswa dari pemerintah" },
       ],
@@ -422,20 +422,20 @@ export const importantLinks = [
       id: 4,
       category: "Bantuan & Dukungan",
       links: [
-         { name: "Satgas Senyar", url: "/", description: "Satuan Tugas Senyar Aceh USK" },
-         { name: "TDMRC USK", url: "https://tdmrc.usk.ac.id", description: "Tsunami and Disaster Mitigation Research Center" },
-         { name: "Poliklinik USK", url: "#", description: "Layanan kesehatan kampus" },
-         { name: "Hotline USK", url: "#", description: "Layanan pengaduan dan informasi" },
+         { name: "Satgas Senyar", url: "/", description: "Satuan Tugas Senyar Aceh UINAR" },
+         { name: "TDMRC UINAR", url: "https://tdmrc.UINAR.ac.id", description: "Tsunami and Disaster Mitigation Research Center" },
+         { name: "Poliklinik UINAR", url: "#", description: "Layanan kesehatan kampus" },
+         { name: "Hotline UINAR", url: "#", description: "Layanan pengaduan dan informasi" },
       ],
    },
    {
       id: 5,
       category: "Karir & Alumni",
       links: [
-         { name: "Career Center USK", url: "#", description: "Pusat informasi karir dan lowongan kerja" },
-         { name: "Alumni USK", url: "#", description: "Portal alumni Universitas Syiah Kuala" },
+         { name: "Career Center UINAR", url: "#", description: "Pusat informasi karir dan lowongan kerja" },
+         { name: "Alumni UINAR", url: "#", description: "Portal alumni Universitas Syiah Kuala" },
          { name: "Magang & PKL", url: "#", description: "Informasi program magang dan praktik kerja" },
-         { name: "Job Fair USK", url: "#", description: "Bursa kerja dan rekrutmen" },
+         { name: "Job Fair UINAR", url: "#", description: "Bursa kerja dan rekrutmen" },
       ],
    },
 ];

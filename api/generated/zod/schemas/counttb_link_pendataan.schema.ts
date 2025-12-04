@@ -1,0 +1,10 @@
+import type { Prisma } from '../../prisma/client';
+import * as z from 'zod';
+import { tb_link_pendataanOrderByWithRelationInputObjectSchema as tb_link_pendataanOrderByWithRelationInputObjectSchema } from './objects/tb_link_pendataanOrderByWithRelationInput.schema';
+import { tb_link_pendataanWhereInputObjectSchema as tb_link_pendataanWhereInputObjectSchema } from './objects/tb_link_pendataanWhereInput.schema';
+import { tb_link_pendataanWhereUniqueInputObjectSchema as tb_link_pendataanWhereUniqueInputObjectSchema } from './objects/tb_link_pendataanWhereUniqueInput.schema';
+import { Tb_link_pendataanCountAggregateInputObjectSchema as Tb_link_pendataanCountAggregateInputObjectSchema } from './objects/Tb_link_pendataanCountAggregateInput.schema';
+
+export const tb_link_pendataanCountSchema: z.ZodType<Prisma.tb_link_pendataanCountArgs> = z.object({ orderBy: z.union([tb_link_pendataanOrderByWithRelationInputObjectSchema, tb_link_pendataanOrderByWithRelationInputObjectSchema.array()]).optional(), where: tb_link_pendataanWhereInputObjectSchema.optional(), cursor: tb_link_pendataanWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), select: z.union([ z.literal(true), Tb_link_pendataanCountAggregateInputObjectSchema ]).optional() }).strict() as unknown as z.ZodType<Prisma.tb_link_pendataanCountArgs>;
+
+export const tb_link_pendataanCountZodSchema = z.object({ orderBy: z.union([tb_link_pendataanOrderByWithRelationInputObjectSchema, tb_link_pendataanOrderByWithRelationInputObjectSchema.array()]).optional(), where: tb_link_pendataanWhereInputObjectSchema.optional(), cursor: tb_link_pendataanWhereUniqueInputObjectSchema.optional(), take: z.number().optional(), skip: z.number().optional(), select: z.union([ z.literal(true), Tb_link_pendataanCountAggregateInputObjectSchema ]).optional() }).strict();

@@ -29,7 +29,7 @@ const ImportantLinks = () => {
                      <div>
                         <h3 className="font-semibold text-gray-900 mb-2">Akses Cepat</h3>
                         <p className="text-gray-700 text-sm">
-                           Berikut adalah daftar link penting yang sering digunakan oleh mahasiswa USK. Klik pada link untuk mengakses layanan yang
+                           Berikut adalah daftar link penting yang sering digunakan oleh mahasiswa UINAR. Klik pada link untuk mengakses layanan yang
                            diperlukan.
                         </p>
                      </div>
@@ -78,11 +78,11 @@ const ImportantLinks = () => {
                   <ul className="space-y-2 text-sm text-gray-700">
                      <li className="flex items-start">
                         <span className="text-blue-600 mr-2">•</span>
-                        <span>Helpdesk IT USK: helpdesk@usk.ac.id</span>
+                        <span>Helpdesk IT UINAR: helpdesk@UINAR.ac.id</span>
                      </li>
                      <li className="flex items-start">
                         <span className="text-blue-600 mr-2">•</span>
-                        <span>Satgas Senyar: senyar@usk.ac.id</span>
+                        <span>Satgas Senyar: senyar@UINAR.ac.id</span>
                      </li>
                      <li className="flex items-start">
                         <span className="text-blue-600 mr-2">•</span>

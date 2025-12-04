@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model tb_link_pendataan {
+  id   Int     @id(map: "tb_link_pendataan_pk") @default(autoincrement())
+  link String? @db.VarChar
+}
+
+model tb_program {
+  id       Int       @id(map: "tb_program_pk") @default(autoincrement())
+  judul    String?   @db.VarChar
+  content  String?
+  uploaded DateTime? @db.Timestamp(6)
+  modified DateTime? @db.Timestamp(6)
+}

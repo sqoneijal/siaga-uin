@@ -45,7 +45,7 @@ const Announcements = () => {
                   Kembali ke Beranda
                </button>
                <h1 className="text-4xl font-bold text-gray-900 mb-2">Pengumuman</h1>
-               <p className="text-gray-600">Informasi dan pengumuman resmi dari Satgas Senyar USK</p>
+               <p className="text-gray-600">Informasi dan pengumuman resmi dari Siaga UIN Ar Raniry</p>
             </div>
 
             {/* Category Filter */}

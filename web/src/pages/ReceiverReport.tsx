@@ -36,7 +36,7 @@ const ReceiverReport = () => {
                   Kembali ke Beranda
                </button>
                <h1 className="text-4xl font-bold text-gray-900 mb-2">Laporan Penerimaan Bantuan</h1>
-               <p className="text-gray-600">Data mahasiswa yang telah menerima bantuan dari Satgas Senyar USK</p>
+               <p className="text-gray-600">Data mahasiswa yang telah menerima bantuan dari Siaga UIN Ar Raniry</p>
             </div>
 
             {/* Filters & Actions */}

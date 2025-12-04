@@ -24,7 +24,7 @@ const Gallery = () => {
             <div className="text-center max-w-3xl mx-auto mb-12">
                <span className="text-blue-600 font-semibold text-sm uppercase tracking-wider">Galeri</span>
                <h2 className="text-4xl font-bold text-gray-900 mt-4 mb-6">Dokumentasi Kegiatan</h2>
-               <p className="text-lg text-gray-600">Momen-momen berharga dari berbagai kegiatan dan program Satgas Senyar USK.</p>
+               <p className="text-lg text-gray-600">Momen-momen berharga dari berbagai kegiatan dan program Siaga UIN Ar Raniry.</p>
             </div>
 
             {/* Category Filter */}

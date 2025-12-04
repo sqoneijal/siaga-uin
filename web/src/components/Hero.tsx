@@ -1,13 +1,19 @@
+import { crudService } from "@/lib/crudService";
 import { ArrowRight, Award, Heart, Users } from "lucide-react";
 import { Button } from "./ui/button";
 
+interface LinkPendataan {
+   id: number;
+   link?: string;
+}
+
 const Hero = () => {
-   const scrollToSection = (href: string) => {
-      const element = document.querySelector(href);
-      if (element) {
-         element.scrollIntoView({ behavior: "smooth" });
-      }
-   };
+   const { useDetail } = crudService<LinkPendataan>("/link-pendataan");
+   const { data, isLoading } = useDetail(1);
+
+   if (isLoading) {
+      return <div>loading...</div>;
+   }
 
    return (
       <section id="home" className="pt-20 bg-gradient-to-br from-blue-50 via-white to-blue-50">
@@ -18,29 +24,19 @@ const Hero = () => {
                   <div className="inline-block">
                      <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">Duka Aceh dan Solidaritas Kita</span>
                   </div>
-                  <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                     Bersama Membantu<span className="text-blue-600"> Mahasiswa</span> UINAR
+                  <h1 className="text-3xl font-bold text-gray-900 leading-tight">
+                     Banjir Telah Pergi, Tapi Luka Masih Tinggal! <span className="text-blue-600">Saatnya Kita Menyembuhkan!</span>
                   </h1>
                   <p className="text-lg text-gray-600 leading-relaxed">
-                     Satgas Senyar USK hadir untuk memberikan dukungan dan bantuan kepada mahasiswa Universitas Syiah Kuala yang membutuhkan. Kami
-                     berkomitmen untuk memastikan setiap mahasiswa dapat menyelesaikan pendidikan dengan baik.
+                     Solidaritas UIN Ar-Raniry hadir secara sigap dan berpihak pada mahasiswa untuk memastikan setiap mahasiswa dapat melanjutkan
+                     proses pembelajaran secara berkelanjutan, sekaligus memberikan bantuan kepada korban bencana di Aceh. Kami bergerak cepat,
+                     memberikan dukungan, membuka akses, dan mengatasi hambatan agar tidak ada yang tertinggal. Untuk informasi dan dukungan lebih
+                     lanjut, silakan hubungi kami; kami siap mendampingi hingga tuntas
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                     <Button
-                        onClick={() =>
-                           open("https://docs.google.com/forms/d/e/1FAIpQLSexXuXsVx_78fAlyMDXVMUs708aN7EZAHfJxTak3pKJppTSwA/viewform", "_blank")
-                        }
-                        size="lg"
-                        className="bg-blue-600 hover:bg-blue-700 text-white group">
-                        Daftar Sekarang
+                     <Button onClick={() => open(data?.link, "_blank")} size="lg" className="bg-blue-600 hover:bg-blue-700 text-white group">
+                        Lapor Diri Mahasiswa
                         <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                     </Button>
-                     <Button
-                        onClick={() => scrollToSection("#about")}
-                        size="lg"
-                        variant="outline"
-                        className="border-blue-600 text-blue-600 hover:bg-blue-50">
-                        Pelajari Lebih Lanjut
                      </Button>
                   </div>
                   {/* Quick Stats */}
@@ -72,12 +68,8 @@ const Hero = () => {
                {/* Right Content - Image/Illustration */}
                <div className="relative">
                   <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                     <img
-                        src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=600&fit=crop"
-                        alt="Mahasiswa USK"
-                        className="w-full h-full object-cover"
-                     />
-                     <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
+                     <img src="/poster.jpg" alt="Mahasiswa UINAR" className="w-full h-full object-cover" />
+                     <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent" />
                   </div>
 
                   {/* Floating Card */}
