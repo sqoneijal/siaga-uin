@@ -1,5 +1,10 @@
+import { crudService } from "@/lib/crudService";
+import dompurify from "dompurify";
+import { decode } from "html-entities";
 import { Eye, Heart, Shield, Target } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
+
+type FormData = Record<string, string>;
 
 const About = () => {
    const values = [
@@ -25,6 +30,16 @@ const About = () => {
       },
    ];
 
+   const { useDetail: detailVisi } = crudService<FormData>("/visi");
+   const { data: visi, isLoading: isLoadingVisi } = detailVisi(1);
+
+   const { useDetail: detailMisi } = crudService<FormData>("/misi");
+   const { data: misi, isLoading: isLoadingMisi } = detailMisi(1);
+
+   if (isLoadingVisi || isLoadingMisi) {
+      return <div>loading...</div>;
+   }
+
    return (
       <section id="about" className="py-20 bg-white">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,10 +61,7 @@ const About = () => {
                         <Eye className="w-7 h-7 text-blue-600" />
                      </div>
                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Visi</h3>
-                     <p className="text-gray-600 leading-relaxed">
-                        Menjadi lembaga pendukung utama dalam mewujudkan kesejahteraan mahasiswa Universitas Syiah Kuala yang inklusif, profesional,
-                        dan berkelanjutan.
-                     </p>
+                     <p className="text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: dompurify.sanitize(decode(visi?.content)) }} />
                   </CardContent>
                </Card>
 
@@ -59,20 +71,7 @@ const About = () => {
                         <Target className="w-7 h-7 text-green-600" />
                      </div>
                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Misi</h3>
-                     <ul className="space-y-3 text-gray-600">
-                        <li className="flex items-start">
-                           <span className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                           <span>Memberikan bantuan finansial kepada mahasiswa yang membutuhkan</span>
-                        </li>
-                        <li className="flex items-start">
-                           <span className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                           <span>Menyediakan layanan konseling dan pendampingan</span>
-                        </li>
-                        <li className="flex items-start">
-                           <span className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                           <span>Membangun jaringan dukungan untuk mahasiswa</span>
-                        </li>
-                     </ul>
+                     <p className="text-gray-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: dompurify.sanitize(decode(misi?.content)) }} />
                   </CardContent>
                </Card>
             </div>

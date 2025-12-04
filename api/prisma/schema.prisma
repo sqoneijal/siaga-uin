@@ -19,3 +19,13 @@ model tb_program {
   uploaded DateTime? @db.Timestamp(6)
   modified DateTime? @db.Timestamp(6)
 }
+
+model tb_misi {
+  id      Int     @id(map: "tb_misi_pk") @default(autoincrement())
+  content String?
+}
+
+model tb_visi {
+  id      Int     @id(map: "tb_visi_pk") @default(autoincrement())
+  content String?
+}
