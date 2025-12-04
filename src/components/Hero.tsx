@@ -18,20 +18,21 @@ const Hero = () => {
                   <div className="inline-block">
                      <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">Duka Aceh dan Solidaritas Kita</span>
                   </div>
-
                   <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                     Bersama Membantu
-                     <span className="text-blue-600"> Mahasiswa</span> USK
+                     Bersama Membantu<span className="text-blue-600"> Mahasiswa</span> UINAR
                   </h1>
-
                   <p className="text-lg text-gray-600 leading-relaxed">
                      Satgas Senyar USK hadir untuk memberikan dukungan dan bantuan kepada mahasiswa Universitas Syiah Kuala yang membutuhkan. Kami
                      berkomitmen untuk memastikan setiap mahasiswa dapat menyelesaikan pendidikan dengan baik.
                   </p>
-
                   <div className="flex flex-col sm:flex-row gap-4">
-                     <Button onClick={() => scrollToSection("#registration")} size="lg" className="bg-blue-600 hover:bg-blue-700 text-white group">
-                        Ajukan Bantuan
+                     <Button
+                        onClick={() =>
+                           open("https://docs.google.com/forms/d/e/1FAIpQLSexXuXsVx_78fAlyMDXVMUs708aN7EZAHfJxTak3pKJppTSwA/viewform", "_blank")
+                        }
+                        size="lg"
+                        className="bg-blue-600 hover:bg-blue-700 text-white group">
+                        Daftar Sekarang
                         <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                      </Button>
                      <Button
@@ -42,7 +43,6 @@ const Hero = () => {
                         Pelajari Lebih Lanjut
                      </Button>
                   </div>
-
                   {/* Quick Stats */}
                   <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-200">
                      <div className="text-center">

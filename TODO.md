@@ -1,5 +1,0 @@
--  [x] Define TypeScript interfaces for Toast, Action, and State
--  [ ] Add types to the reducer function
--  [ ] Add types to the toast function
--  [ ] Add types to the useToast hook
--  [ ] Verify TypeScript compilation

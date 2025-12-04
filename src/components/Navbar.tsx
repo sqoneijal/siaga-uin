@@ -1,10 +1,24 @@
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
+import { useLocation, useNavigate } from "react-router-dom";
+
+interface MenuItem {
+   label: string;
+   href: string;
+   type: string;
+}
+
+interface NavItem {
+   label: string;
+   href: string;
+}
 
 const Navbar = () => {
    const [isScrolled, setIsScrolled] = useState(false);
    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+   const [isLaporanOpen, setIsLaporanOpen] = useState(false);
+   const navigate = useNavigate();
+   const location = useLocation();
 
    useEffect(() => {
       const handleScroll = () => {
@@ -14,22 +28,49 @@ const Navbar = () => {
       return () => window.removeEventListener("scroll", handleScroll);
    }, []);
 
-   const menuItems = [
-      { label: "Beranda", href: "#home" },
-      { label: "Tentang", href: "#about" },
-      { label: "Program", href: "#programs" },
-      { label: "Berita", href: "#news" },
-      { label: "Galeri", href: "#gallery" },
-      { label: "Kontak", href: "#contact" },
+   const menuItems: Array<MenuItem> = [
+      { label: "Beranda", href: "/", type: "route" },
+      { label: "Tentang", href: "#about", type: "scroll" },
+      { label: "Program", href: "#programs", type: "scroll" },
+      { label: "Berita", href: "#news", type: "scroll" },
+      { label: "Galeri", href: "#gallery", type: "scroll" },
+      { label: "Kontak", href: "#contact", type: "scroll" },
    ];
 
-   const scrollToSection = (e: React.MouseEvent<HTMLElement>, href: string) => {
+   const laporanItems: Array<NavItem> = [
+      { label: "Penerimaan", href: "/laporan-penerimaan" },
+      { label: "Penyaluran", href: "/laporan-penyaluran" },
+   ];
+
+   const infoItems: Array<NavItem> = [
+      { label: "Pengumuman", href: "/pengumuman" },
+      { label: "Link Penting", href: "/link-penting" },
+   ];
+
+   const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, item: MenuItem) => {
       e.preventDefault();
-      const element = document.querySelector(href);
-      if (element) {
-         element.scrollIntoView({ behavior: "smooth" });
-         setIsMobileMenuOpen(false);
+      setIsMobileMenuOpen(false);
+
+      if (item.type === "route") {
+         navigate(item.href);
+      } else if (item.type === "scroll") {
+         if (location.pathname === "/") {
+            const element = document.querySelector(item.href);
+            if (element) element.scrollIntoView({ behavior: "smooth" });
+         } else {
+            navigate("/");
+            setTimeout(() => {
+               const element = document.querySelector(item.href);
+               if (element) element.scrollIntoView({ behavior: "smooth" });
+            }, 100);
+         }
       }
+   };
+
+   const handleRouteClick = (href: string) => {
+      navigate(href);
+      setIsMobileMenuOpen(false);
+      setIsLaporanOpen(false);
    };
 
    return (
@@ -41,8 +82,8 @@ const Navbar = () => {
             <div className="flex justify-between items-center h-20">
                {/* Logo */}
                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
-                     <span className="text-white font-bold text-xl">UIN</span>
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center">
+                     <img src="/32x32.png" alt="logo uinar" />
                   </div>
                   <div className="flex flex-col">
                      <span className="font-bold text-gray-900 text-lg">Ar Raniry Peduli</span>
@@ -51,19 +92,52 @@ const Navbar = () => {
                </div>
 
                {/* Desktop Menu */}
-               <div className="hidden md:flex items-center space-x-8">
+               <div className="hidden md:flex items-center space-x-6">
                   {menuItems.map((item) => (
                      <a
                         key={item.label}
                         href={item.href}
-                        onClick={(e) => scrollToSection(e, item.href)}
+                        onClick={(e) => handleNavigation(e, item)}
                         className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">
                         {item.label}
                      </a>
                   ))}
-                  <Button onClick={(e) => scrollToSection(e, "#registration")} className="bg-blue-600 hover:bg-blue-700 text-white">
-                     Daftar Sekarang
-                  </Button>
+
+                  {/* Dropdown Laporan */}
+                  <div className="relative group">
+                     <button className="flex items-center text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">
+                        Laporan
+                        <ChevronDown className="w-4 h-4 ml-1" />
+                     </button>
+                     <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        {laporanItems.map((item) => (
+                           <button
+                              key={item.label}
+                              onClick={() => handleRouteClick(item.href)}
+                              className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors first:rounded-t-lg last:rounded-b-lg">
+                              {item.label}
+                           </button>
+                        ))}
+                     </div>
+                  </div>
+
+                  {/* Dropdown Informasi */}
+                  <div className="relative group">
+                     <button className="flex items-center text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">
+                        Informasi
+                        <ChevronDown className="w-4 h-4 ml-1" />
+                     </button>
+                     <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        {infoItems.map((item) => (
+                           <button
+                              key={item.label}
+                              onClick={() => handleRouteClick(item.href)}
+                              className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors first:rounded-t-lg last:rounded-b-lg">
+                              {item.label}
+                           </button>
+                        ))}
+                     </div>
+                  </div>
                </div>
 
                {/* Mobile Menu Button */}
@@ -81,14 +155,48 @@ const Navbar = () => {
                      <a
                         key={item.label}
                         href={item.href}
-                        onClick={(e) => scrollToSection(e, item.href)}
+                        onClick={(e) => handleNavigation(e, item)}
                         className="block py-3 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">
                         {item.label}
                      </a>
                   ))}
-                  <Button onClick={(e) => scrollToSection(e, "#registration")} className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white">
-                     Daftar Sekarang
-                  </Button>
+
+                  {/* Mobile Laporan Dropdown */}
+                  <div className="py-3">
+                     <button
+                        onClick={() => setIsLaporanOpen(!isLaporanOpen)}
+                        className="flex items-center justify-between w-full text-gray-700 font-medium">
+                        Laporan
+                        <ChevronDown className={`w-4 h-4 transition-transform ${isLaporanOpen ? "rotate-180" : ""}`} />
+                     </button>
+                     {isLaporanOpen && (
+                        <div className="pl-4 mt-2 space-y-2">
+                           {laporanItems.map((item) => (
+                              <button
+                                 key={item.label}
+                                 onClick={() => handleRouteClick(item.href)}
+                                 className="block w-full text-left py-2 text-gray-600 hover:text-blue-600">
+                                 {item.label}
+                              </button>
+                           ))}
+                        </div>
+                     )}
+                  </div>
+
+                  {/* Mobile Informasi Dropdown */}
+                  <div className="py-3">
+                     <div className="text-gray-700 font-medium mb-2">Informasi</div>
+                     <div className="pl-4 space-y-2">
+                        {infoItems.map((item) => (
+                           <button
+                              key={item.label}
+                              onClick={() => handleRouteClick(item.href)}
+                              className="block w-full text-left py-2 text-gray-600 hover:text-blue-600">
+                              {item.label}
+                           </button>
+                        ))}
+                     </div>
+                  </div>
                </div>
             )}
          </div>

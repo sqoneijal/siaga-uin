@@ -1,31 +1,30 @@
-import About from "@/components/About";
-import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import { Toaster } from "@/components/ui/toaster";
+import Announcements from "@/pages/Announcements";
+import DistributionReport from "@/pages/DistributionReport";
+import HomePage from "@/pages/HomePage";
+import ImportantLinks from "@/pages/ImportantLinks";
+import ReceiverReport from "@/pages/ReceiverReport";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Footer from "./components/Footer";
-import Gallery from "./components/Gallery";
-import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
-import News from "./components/News";
-import Programs from "./components/Programs";
-import RegistrationForm from "./components/RegistrationForm";
-import Statistics from "./components/Statistics";
-import { Toaster } from "./components/ui/toaster";
 
 function App() {
    return (
-      <div className="App">
-         <Navbar />
-         <Hero />
-         <About />
-         <Programs />
-         <Statistics />
-         <News />
-         <Gallery />
-         <RegistrationForm />
-         <Contact />
-         <Footer />
-         <Toaster />
-      </div>
+      <BrowserRouter>
+         <div className="App">
+            <Navbar />
+            <Routes>
+               <Route path="/" element={<HomePage />} />
+               <Route path="/laporan-penerimaan" element={<ReceiverReport />} />
+               <Route path="/laporan-penyaluran" element={<DistributionReport />} />
+               <Route path="/pengumuman" element={<Announcements />} />
+               <Route path="/link-penting" element={<ImportantLinks />} />
+            </Routes>
+            <Footer />
+            <Toaster />
+         </div>
+      </BrowserRouter>
    );
 }
 
