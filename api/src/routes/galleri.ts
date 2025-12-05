@@ -1,7 +1,58 @@
+import axios from "axios";
+import * as cheerio from "cheerio";
 import { Request, Response, Router } from "express";
 import { prisma } from "../lib/prisma";
 
 const router = Router();
+
+const getImage = async (folder_id: string) => {
+   const driveUrl = `https://drive.google.com/embeddedfolderview?id=${folder_id}#list`;
+
+   const response = await axios.get(driveUrl);
+   const html = response.data;
+
+   const $ = cheerio.load(html);
+   const results: Array<{ id: string; preview: string; download: string }> = [];
+
+   $(".flip-entries").each((_, el) => {
+      const id = $(el).attr("data-id");
+      if (id) {
+         results.push({
+            id,
+            preview: `https://drive.google.com/file/d/${id}/view`,
+            download: `https://drive.google.com/uc?export=download&id=${id}`,
+         });
+      }
+   });
+
+   return results;
+};
+
+router.get("/new", async (req: Request, res: Response) => {
+   try {
+      const content = await prisma.tb_galleri.findMany({
+         take: 5,
+         orderBy: {
+            id: "desc",
+         },
+      });
+
+      const results: Array<{
+         id: number;
+         judul: string | null;
+         link_folder_drive: string | null;
+         image: Promise<Array<{ id: string; preview: string; download: string }>>;
+      }> = [];
+
+      content.map((row) => {
+         results.push({ ...row, image: row.link_folder_drive ? getImage(row.link_folder_drive) : Promise.resolve([]) });
+      });
+
+      res.json({ results });
+   } catch (error) {
+      res.status(500).json({ message: (error as Error)?.message });
+   }
+});
 
 router.post("/", async (req: Request, res: Response) => {
    try {

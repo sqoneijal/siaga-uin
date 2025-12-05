@@ -1,3 +1,4 @@
+import { crudService } from "@/lib/crudService";
 import { gallery } from "@/mockData";
 import { X } from "lucide-react";
 import { useState } from "react";
@@ -9,13 +10,31 @@ interface GalleryItem {
    category: string;
 }
 
+type Response = {
+   results: Array<Record<string, string>>;
+};
+
 const Gallery = () => {
+   const { useList } = crudService("/galleri/new");
+   const { data, isLoading } = useList<Response>();
+
    const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
    const [selectedCategory, setSelectedCategory] = useState("Semua");
 
-   const categories = ["Semua", "Kegiatan", "Workshop", "Bantuan"];
-
    const filteredGallery = selectedCategory === "Semua" ? gallery : gallery.filter((item) => item.category === selectedCategory);
+
+   if (isLoading) {
+      return <div>loading...</div>;
+   }
+
+   const categories = ["Semua"];
+   if (data?.results) {
+      for (const item of data.results) {
+         categories.push(item.judul);
+
+         console.log(item.link_folder_drive);
+      }
+   }
 
    return (
       <section id="gallery" className="py-20 bg-gray-50">
