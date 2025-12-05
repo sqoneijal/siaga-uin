@@ -41,6 +41,38 @@ const data = {
                title: "Misi",
                url: "/misi",
             },
+            {
+               title: "Galleri",
+               url: "/galleri",
+            },
+         ],
+      },
+      {
+         title: "Laporan",
+         url: "#",
+         items: [
+            {
+               title: "Penerimaan",
+               url: "/laporan/penerimaan",
+            },
+            {
+               title: "Penyaluran",
+               url: "/laporan/penyaluran",
+            },
+         ],
+      },
+      {
+         title: "Informasi",
+         url: "#",
+         items: [
+            {
+               title: "Pengumuman",
+               url: "/informasi/pengumuman",
+            },
+            {
+               title: "Link Penting",
+               url: "/informasi/link-penting",
+            },
          ],
       },
    ],

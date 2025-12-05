@@ -68,16 +68,14 @@ const Programs = () => {
             </div>
 
             {/* CTA Section */}
-            <div className="mt-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-12 text-center">
+            <div className="mt-16 bg-gradient-to-r from-green-600 to-yellow-100 rounded-2xl p-12 text-center">
                <h3 className="text-3xl font-bold text-white mb-4">Butuh Bantuan?</h3>
-               <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
-                  Jangan ragu untuk menghubungi kami atau mengisi formulir pendaftaran. Tim kami siap membantu Anda.
-               </p>
+               <img alt="poster 2" src="/poster-2.jpg" className="mx-auto" style={{ height: 500 }} />
                <button
                   onClick={() => {
                      open(linkPendataan?.link, "_blank");
                   }}
-                  className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                  className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors mt-2">
                   Lapor Diri Mahasiswa
                </button>
             </div>

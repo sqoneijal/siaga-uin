@@ -15,9 +15,9 @@ const ReceiverReport = () => {
 
    const programs = ["Semua", "Bantuan Finansial", "Beasiswa Prestasi", "Bantuan Darurat", "Bantuan Kesehatan", "Pelatihan & Keterampilan"];
 
-   const filteredReports = receiverReports.filter((report) => {
-      const matchSearch = report.name.toLowerCase().includes(searchTerm.toLowerCase()) || report.nim.includes(searchTerm);
-      const matchProgram = filterProgram === "Semua" || report.program === filterProgram;
+   const filteredReports = receiverReports?.filter((report) => {
+      const matchSearch = report?.name.toLowerCase().includes(searchTerm.toLowerCase()) || report.nim.includes(searchTerm);
+      const matchProgram = filterProgram === "Semua" || report?.program === filterProgram;
       return matchSearch && matchProgram;
    });
 

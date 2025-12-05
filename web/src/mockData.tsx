@@ -191,146 +191,31 @@ export const testimonials = [
 ];
 
 // Laporan Penerimaan Bantuan
-export const receiverReports = [
-   {
-      id: 1,
-      name: "Ahmad Fauzi",
-      nim: "2101101010001",
-      faculty: "Fakultas Teknik",
-      program: "Bantuan Finansial",
-      amount: "Rp 3.000.000",
-      status: "Diterima",
-      date: "15 Januari 2024",
-   },
-   {
-      id: 2,
-      name: "Siti Rahma",
-      nim: "2101101010002",
-      faculty: "Fakultas Kedokteran",
-      program: "Beasiswa Prestasi",
-      amount: "Rp 5.000.000",
-      status: "Diterima",
-      date: "15 Januari 2024",
-   },
-   {
-      id: 3,
-      name: "Muhammad Rizki",
-      nim: "2101101010003",
-      faculty: "Fakultas Ekonomi",
-      program: "Bantuan Finansial",
-      amount: "Rp 2.500.000",
-      status: "Diterima",
-      date: "12 Januari 2024",
-   },
-   {
-      id: 4,
-      name: "Fatimah Zahra",
-      nim: "2101101010004",
-      faculty: "Fakultas Hukum",
-      program: "Bantuan Darurat",
-      amount: "Rp 1.500.000",
-      status: "Diterima",
-      date: "10 Januari 2024",
-   },
-   {
-      id: 5,
-      name: "Hassan Ibrahim",
-      nim: "2101101010005",
-      faculty: "Fakultas MIPA",
-      program: "Beasiswa Prestasi",
-      amount: "Rp 4.000.000",
-      status: "Diterima",
-      date: "8 Januari 2024",
-   },
-   {
-      id: 6,
-      name: "Nur Azizah",
-      nim: "2101101010006",
-      faculty: "Fakultas Pertanian",
-      program: "Bantuan Finansial",
-      amount: "Rp 3.500.000",
-      status: "Diterima",
-      date: "5 Januari 2024",
-   },
-   {
-      id: 7,
-      name: "Rafi Ananda",
-      nim: "2101101010007",
-      faculty: "Fakultas Teknik",
-      program: "Bantuan Kesehatan",
-      amount: "Rp 2.000.000",
-      status: "Diterima",
-      date: "3 Januari 2024",
-   },
-   {
-      id: 8,
-      name: "Dewi Kartika",
-      nim: "2101101010008",
-      faculty: "Fakultas Ekonomi",
-      program: "Pelatihan & Keterampilan",
-      amount: "Rp 1.000.000",
-      status: "Diterima",
-      date: "2 Januari 2024",
-   },
-];
+interface ReceiverReport {
+   id: number;
+   name: string;
+   nim: string;
+   faculty: string;
+   program: string;
+   amount: string;
+   date: string;
+   status: string;
+}
+
+export const receiverReports: Array<ReceiverReport> = [];
 
 // Laporan Penyaluran Bantuan
-export const distributionReports = [
-   {
-      id: 1,
-      period: "Januari 2024",
-      programType: "Bantuan Finansial",
-      totalRecipients: 45,
-      totalAmount: "Rp 135.000.000",
-      status: "Selesai",
-      date: "31 Januari 2024",
-   },
-   {
-      id: 2,
-      period: "Januari 2024",
-      programType: "Beasiswa Prestasi",
-      totalRecipients: 20,
-      totalAmount: "Rp 100.000.000",
-      status: "Selesai",
-      date: "31 Januari 2024",
-   },
-   {
-      id: 3,
-      period: "Januari 2024",
-      programType: "Bantuan Darurat",
-      totalRecipients: 15,
-      totalAmount: "Rp 22.500.000",
-      status: "Selesai",
-      date: "31 Januari 2024",
-   },
-   {
-      id: 4,
-      period: "Desember 2023",
-      programType: "Bantuan Finansial",
-      totalRecipients: 50,
-      totalAmount: "Rp 150.000.000",
-      status: "Selesai",
-      date: "31 Desember 2023",
-   },
-   {
-      id: 5,
-      period: "Desember 2023",
-      programType: "Pelatihan & Keterampilan",
-      totalRecipients: 30,
-      totalAmount: "Rp 30.000.000",
-      status: "Selesai",
-      date: "31 Desember 2023",
-   },
-   {
-      id: 6,
-      period: "Desember 2023",
-      programType: "Bantuan Kesehatan",
-      totalRecipients: 25,
-      totalAmount: "Rp 50.000.000",
-      status: "Selesai",
-      date: "31 Desember 2023",
-   },
-];
+interface DistributionReport {
+   id: number;
+   period: string;
+   programType: string;
+   totalRecipients: number;
+   totalAmount: string;
+   date: string;
+   status: string;
+}
+
+export const distributionReports: Array<DistributionReport> = [];
 
 // Pengumuman
 export const announcements = [

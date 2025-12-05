@@ -1,4 +1,5 @@
 import { Router } from "express";
+import galleri from "./galleri";
 import linkPendataan from "./link-pendataan";
 import login from "./login";
 import misi from "./misi";
@@ -12,6 +13,7 @@ router.use("/program", program);
 router.use("/visi", visi);
 router.use("/misi", misi);
 router.use("/login", login);
+router.use("/galleri", galleri);
 
 // Health check
 router.get("/health", (req, res) => {
