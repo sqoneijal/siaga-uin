@@ -64,7 +64,7 @@ export const news = [
    },
    {
       id: 4,
-      title: "Launching Aplikasi Mobile Satgas Senyar",
+      title: "Launching Aplikasi Mobile ar-raniry peduli",
       date: "10 Desember 2023",
       category: "Inovasi",
       excerpt: "Kemudahan akses layanan melalui aplikasi mobile untuk mempercepat proses bantuan mahasiswa.",
@@ -80,7 +80,7 @@ export const news = [
    },
    {
       id: 6,
-      title: "Apresiasi Donatur dan Mitra Satgas Senyar 2023",
+      title: "Apresiasi Donatur dan Mitra ar-raniry peduli 2023",
       date: "1 Desember 2023",
       category: "Pengumuman",
       excerpt: "Acara apresiasi kepada seluruh donatur dan mitra yang telah mendukung program Siaga UIN Ar Raniry.",
@@ -142,25 +142,25 @@ export const gallery = [
 export const statistics = [
    {
       id: 1,
-      value: "2,500+",
+      value: "3,500+",
       label: "Mahasiswa Terbantu",
       icon: "users",
    },
    {
       id: 2,
-      value: "50+",
+      value: "5+",
       label: "Program Berjalan",
       icon: "briefcase",
    },
    {
       id: 3,
-      value: "15+",
+      value: "10+",
       label: "Mitra Kerja Sama",
       icon: "handshake",
    },
    {
       id: 4,
-      value: "Rp 5M+",
+      value: "Rp 1M+",
       label: "Dana Tersalurkan",
       icon: "trending-up",
    },
@@ -171,7 +171,7 @@ export const testimonials = [
       id: 1,
       name: "Ahmad Fauzi",
       faculty: "Fakultas Teknik",
-      text: "Bantuan dari Satgas Senyar sangat membantu saya menyelesaikan studi. Terima kasih atas dukungannya!",
+      text: "Bantuan dari ar-raniry peduli sangat membantu saya menyelesaikan studi. Terima kasih atas dukungannya!",
       avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ahmad",
    },
    {
@@ -185,7 +185,7 @@ export const testimonials = [
       id: 3,
       name: "Muhammad Rizki",
       faculty: "Fakultas Ekonomi",
-      text: "Beasiswa prestasi dari Satgas Senyar memotivasi saya untuk terus berprestasi di kampus.",
+      text: "Beasiswa prestasi dari ar-raniry peduli memotivasi saya untuk terus berprestasi di kampus.",
       avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rizki",
    },
 ];
@@ -341,7 +341,7 @@ export const announcements = [
       category: "Pendaftaran",
       priority: "Penting",
       content:
-         "Siaga UIN Ar Raniry membuka pendaftaran program bantuan untuk semester genap tahun akademik 2023/2024. Pendaftaran dibuka mulai tanggal 1 Februari hingga 28 Februari 2024. Mahasiswa yang membutuhkan bantuan dapat mengisi formulir pendaftaran melalui website atau datang langsung ke sekretariat Satgas Senyar.",
+         "Siaga UIN Ar Raniry membuka pendaftaran program bantuan untuk semester genap tahun akademik 2023/2024. Pendaftaran dibuka mulai tanggal 1 Februari hingga 28 Februari 2024. Mahasiswa yang membutuhkan bantuan dapat mengisi formulir pendaftaran melalui website atau datang langsung ke sekretariat ar-raniry peduli.",
       attachments: ["Formulir_Pendaftaran.pdf", "Syarat_Ketentuan.pdf"],
    },
    {
@@ -361,7 +361,7 @@ export const announcements = [
       category: "Informasi",
       priority: "Biasa",
       content:
-         "Wawancara untuk calon penerima bantuan akan dilaksanakan pada tanggal 25-27 Januari 2024 di ruang rapat Satgas Senyar. Mahasiswa yang lolos seleksi administrasi akan dihubungi melalui email atau telepon untuk konfirmasi jadwal wawancara.",
+         "Wawancara untuk calon penerima bantuan akan dilaksanakan pada tanggal 25-27 Januari 2024 di ruang rapat ar-raniry peduli. Mahasiswa yang lolos seleksi administrasi akan dihubungi melalui email atau telepon untuk konfirmasi jadwal wawancara.",
       attachments: [],
    },
    {
@@ -392,7 +392,7 @@ export const importantLinks = [
       id: 1,
       category: "Universitas",
       links: [
-         { name: "Website UINAR", url: "https://www.UINAR.ac.id", description: "Portal resmi Universitas Syiah Kuala" },
+         { name: "Website UINAR", url: "https://www.UINAR.ac.id", description: "Portal resmi UIN Ar Raniry" },
          { name: "Portal Akademik UINAR", url: "https://portal.UINAR.ac.id", description: "Sistem informasi akademik mahasiswa" },
          { name: "Perpustakaan UINAR", url: "https://library.UINAR.ac.id", description: "Perpustakaan digital dan katalog buku" },
          { name: "E-Learning UINAR", url: "https://elearning.UINAR.ac.id", description: "Platform pembelajaran online" },
@@ -422,7 +422,7 @@ export const importantLinks = [
       id: 4,
       category: "Bantuan & Dukungan",
       links: [
-         { name: "Satgas Senyar", url: "/", description: "Satuan Tugas Senyar Aceh UINAR" },
+         { name: "ar-raniry peduli", url: "/", description: "Satuan Tugas Senyar Aceh UINAR" },
          { name: "TDMRC UINAR", url: "https://tdmrc.UINAR.ac.id", description: "Tsunami and Disaster Mitigation Research Center" },
          { name: "Poliklinik UINAR", url: "#", description: "Layanan kesehatan kampus" },
          { name: "Hotline UINAR", url: "#", description: "Layanan pengaduan dan informasi" },
@@ -433,7 +433,7 @@ export const importantLinks = [
       category: "Karir & Alumni",
       links: [
          { name: "Career Center UINAR", url: "#", description: "Pusat informasi karir dan lowongan kerja" },
-         { name: "Alumni UINAR", url: "#", description: "Portal alumni Universitas Syiah Kuala" },
+         { name: "Alumni UINAR", url: "#", description: "Portal alumni UIN Ar Raniry" },
          { name: "Magang & PKL", url: "#", description: "Informasi program magang dan praktik kerja" },
          { name: "Job Fair UINAR", url: "#", description: "Bursa kerja dan rekrutmen" },
       ],

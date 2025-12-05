@@ -5,7 +5,7 @@ const Footer = () => {
 
    const footerLinks = {
       Tentang: [
-         { label: "Profil Satgas", href: "#about" },
+         { label: "Profil", href: "#about" },
          { label: "Visi & Misi", href: "#about" },
          { label: "Tim Kami", href: "#about" },
       ],
@@ -28,17 +28,15 @@ const Footer = () => {
                {/* Brand */}
                <div className="lg:col-span-1">
                   <div className="flex items-center space-x-3 mb-4">
-                     <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
-                        <span className="text-white font-bold text-xl">UINAR</span>
+                     <div className="w-12 h-12 rounded-lg flex items-center justify-center">
+                        <img src="/32x32.png" alt="logo uinar" />
                      </div>
                      <div className="flex flex-col">
-                        <span className="font-bold text-white text-lg">Satgas Senyar</span>
-                        <span className="text-xs text-gray-400">Universitas Syiah Kuala</span>
+                        <span className="font-bold text-white text-lg">Ar Raniry Peduli</span>
+                        <span className="text-xs text-gray-400">UIN Ar Raniry</span>
                      </div>
                   </div>
-                  <p className="text-gray-400 text-sm">
-                     Membantu dan mendukung mahasiswa UINAR untuk mencapai kesuksesan akademik dan kesejahteraan.
-                  </p>
+                  <p className="text-gray-400 text-sm">Taskforce Siaga UIN Ar-Raniry</p>
                </div>
 
                {/* Links */}

@@ -6,17 +6,17 @@ const Contact = () => {
       {
          icon: MapPin,
          title: "Alamat",
-         content: "Jl. Teuku Nyak Arief No. 441, Darussalam, Banda Aceh, Aceh 23111",
+         content: "Jl. Syech Abdurrauf, KOPELMA Darussalam, Kec. Syiah Kuala, Kota Banda Aceh",
       },
       {
          icon: Phone,
          title: "Telepon",
-         content: "+62 651 7551234",
+         content: "0651-7770505",
       },
       {
          icon: Mail,
          title: "Email",
-         content: "senyar@UINAR.ac.id",
+         content: "peduli@ar-raniry.ac.id",
       },
       {
          icon: Clock,
@@ -26,8 +26,8 @@ const Contact = () => {
    ];
 
    const socialMedia = [
-      { icon: Facebook, name: "Facebook", link: "#" },
-      { icon: Instagram, name: "Instagram", link: "#" },
+      { icon: Facebook, name: "Facebook", link: "https://facebook.com/UINArraniry" },
+      { icon: Instagram, name: "Instagram", link: "https://www.instagram.com/uin_arraniry_official/" },
       { icon: Twitter, name: "Twitter", link: "#" },
    ];
 
@@ -84,14 +84,15 @@ const Contact = () => {
                <div className="h-full min-h-[400px]">
                   <div className="w-full h-full bg-gray-200 rounded-2xl overflow-hidden shadow-xl">
                      <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.2776543211676!2d95.36174731476906!3d5.5628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3040377ae64da45d%3A0x2e35b8b4485f8b88!2sUniversitas%20Syiah%20Kuala!5e0!3m2!1sid!2sid!4v1234567890"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4741.319729339687!2d95.36504537570264!3d5.578858533417961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304037b46b97e193%3A0xbb3dd403a479b82!2sAr-Raniry%20State%20Islamic%20University!5e1!3m2!1sen!2sid!4v1764845415425!5m2!1sen!2sid"
                         width="100%"
                         height="100%"
                         style={{ border: 0 }}
                         allowFullScreen
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
-                        title="Location Map"></iframe>
+                        title="Location Map"
+                     />
                   </div>
                </div>
             </div>

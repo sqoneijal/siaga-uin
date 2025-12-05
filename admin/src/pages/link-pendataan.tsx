@@ -12,7 +12,7 @@ export default function LinkPendataan() {
 
    const [formData, setFormData] = useState<Partial<Record<string, string>>>({ id: "1" });
 
-   const { useUpdate, useDetail } = crudService("/api/link-pendataan");
+   const { useUpdate, useDetail } = crudService("/link-pendataan");
    const { data, isLoading } = useDetail(1);
    const { mutate, isPending } = useUpdate();
 

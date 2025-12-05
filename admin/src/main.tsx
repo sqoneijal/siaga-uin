@@ -1,12 +1,14 @@
 import { Toaster } from "@/components/ui/sonner";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
+const queryClient = new QueryClient();
+
 createRoot(document.getElementById("root")!).render(
-   <GoogleOAuthProvider clientId="845821249090-ed7j37m150dr2pv0h3ki6s75ldso2baj.apps.googleusercontent.com">
+   <QueryClientProvider client={queryClient}>
       <App />
       <Toaster position="top-center" />
-   </GoogleOAuthProvider>
+   </QueryClientProvider>
 );

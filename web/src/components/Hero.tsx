@@ -45,22 +45,15 @@ const Hero = () => {
                         <div className="flex justify-center mb-2">
                            <Users className="w-8 h-8 text-blue-600" />
                         </div>
-                        <div className="text-2xl font-bold text-gray-900">2,500+</div>
+                        <div className="text-2xl font-bold text-gray-900">3,500+</div>
                         <div className="text-sm text-gray-600">Terbantu</div>
                      </div>
                      <div className="text-center">
                         <div className="flex justify-center mb-2">
                            <Award className="w-8 h-8 text-blue-600" />
                         </div>
-                        <div className="text-2xl font-bold text-gray-900">50+</div>
+                        <div className="text-2xl font-bold text-gray-900">10+</div>
                         <div className="text-sm text-gray-600">Program</div>
-                     </div>
-                     <div className="text-center">
-                        <div className="flex justify-center mb-2">
-                           <Heart className="w-8 h-8 text-blue-600" />
-                        </div>
-                        <div className="text-2xl font-bold text-gray-900">5+ Tahun</div>
-                        <div className="text-sm text-gray-600">Pengalaman</div>
                      </div>
                   </div>
                </div>
@@ -79,7 +72,7 @@ const Hero = () => {
                            <Heart className="w-6 h-6 text-green-600" />
                         </div>
                         <div>
-                           <div className="text-2xl font-bold text-gray-900">Rp 5M+</div>
+                           <div className="text-2xl font-bold text-gray-900">Rp 1M+</div>
                            <div className="text-sm text-gray-600">Dana Tersalurkan</div>
                         </div>
                      </div>

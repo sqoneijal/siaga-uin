@@ -141,7 +141,7 @@ const Announcements = () => {
                            <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                               <p className="text-sm text-gray-700">
                                  <strong>Catatan:</strong> Untuk informasi lebih lanjut atau pertanyaan terkait pengumuman ini, silakan hubungi
-                                 sekretariat Satgas Senyar melalui email atau telepon yang tertera di halaman kontak.
+                                 sekretariat ar-raniry peduli melalui email atau telepon yang tertera di halaman kontak.
                               </p>
                            </div>
                         </CardContent>

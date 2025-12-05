@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
    DropdownMenu,
    DropdownMenuContent,
@@ -9,26 +9,25 @@ import {
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
-import type { JwtPayload } from "jwt-decode";
+import type { KeycloakUserInfo } from "@/types/keycloak-user";
 import { jwtDecode } from "jwt-decode";
 import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from "lucide-react";
-import type { Dispatch, SetStateAction } from "react";
 
-interface CustomJwtPayload extends JwtPayload {
-   name: string;
-   email: string;
-   picture?: string;
-   avatar?: string;
-}
+const generateAlias = (fullName: string | undefined) => {
+   if (!fullName?.trim()) return "";
 
-export function NavUser({ setIsLoggedIn }: Readonly<{ setIsLoggedIn: Dispatch<SetStateAction<boolean>> }>) {
+   return fullName
+      .trim()
+      .split(/\s+/)
+      .map((word) => word.charAt(0).toUpperCase())
+      .join("");
+};
+
+export function NavUser() {
    const { isMobile } = useSidebar();
+
    const token = localStorage.getItem("access_token");
-   if (!token) {
-      setIsLoggedIn(false);
-      return null;
-   }
-   const user = jwtDecode<CustomJwtPayload>(token);
+   const user: KeycloakUserInfo | null = token ? jwtDecode(token) : null;
 
    return (
       <SidebarMenu>
@@ -37,12 +36,11 @@ export function NavUser({ setIsLoggedIn }: Readonly<{ setIsLoggedIn: Dispatch<Se
                <DropdownMenuTrigger asChild>
                   <SidebarMenuButton size="lg" className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
                      <Avatar className="h-8 w-8 rounded-lg">
-                        <AvatarImage src={user.picture} alt={user.name} />
-                        <AvatarFallback className="rounded-lg">{user.name}</AvatarFallback>
+                        <AvatarFallback className="rounded-lg">{generateAlias(user?.name)}</AvatarFallback>
                      </Avatar>
                      <div className="grid flex-1 text-left text-sm leading-tight">
-                        <span className="truncate font-medium">{user.name}</span>
-                        <span className="truncate text-xs">{user.email}</span>
+                        <span className="truncate font-medium">{user?.name}</span>
+                        <span className="truncate text-xs">{user?.email}</span>
                      </div>
                      <ChevronsUpDown className="ml-auto size-4" />
                   </SidebarMenuButton>
@@ -55,12 +53,11 @@ export function NavUser({ setIsLoggedIn }: Readonly<{ setIsLoggedIn: Dispatch<Se
                   <DropdownMenuLabel className="p-0 font-normal">
                      <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                         <Avatar className="h-8 w-8 rounded-lg">
-                           <AvatarImage src={user.avatar} alt={user.name} />
-                           <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                           <AvatarFallback className="rounded-lg">{generateAlias(user?.name)}</AvatarFallback>
                         </Avatar>
                         <div className="grid flex-1 text-left text-sm leading-tight">
-                           <span className="truncate font-medium">{user.name}</span>
-                           <span className="truncate text-xs">{user.email}</span>
+                           <span className="truncate font-medium">{user?.name}</span>
+                           <span className="truncate text-xs">{user?.email}</span>
                         </div>
                      </div>
                   </DropdownMenuLabel>
@@ -90,7 +87,8 @@ export function NavUser({ setIsLoggedIn }: Readonly<{ setIsLoggedIn: Dispatch<Se
                   <DropdownMenuItem
                      onClick={() => {
                         localStorage.removeItem("access_token");
-                        setIsLoggedIn(false);
+                        localStorage.removeItem("refresh_token");
+                        globalThis.location.reload();
                      }}>
                      <LogOut />
                      Log out

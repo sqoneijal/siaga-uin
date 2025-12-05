@@ -168,11 +168,11 @@ const DistributionReport = () => {
                      </li>
                      <li className="flex items-start">
                         <span className="text-blue-600 mr-2">•</span>
-                        <span>Semua data telah diverifikasi oleh tim keuangan Satgas Senyar</span>
+                        <span>Semua data telah diverifikasi oleh tim keuangan ar-raniry peduli</span>
                      </li>
                      <li className="flex items-start">
                         <span className="text-blue-600 mr-2">•</span>
-                        <span>Untuk informasi lebih lanjut, hubungi sekretariat Satgas Senyar</span>
+                        <span>Untuk informasi lebih lanjut, hubungi sekretariat ar-raniry peduli</span>
                      </li>
                   </ul>
                </CardContent>

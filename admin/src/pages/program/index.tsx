@@ -16,7 +16,7 @@ type Response = {
 const ActionButtons = ({ id }: Readonly<{ id: string | number }>) => {
    const navigate = useNavigate();
 
-   const { useDelete } = crudService("/api/program");
+   const { useDelete } = crudService("/program");
    const { mutate, isPending } = useDelete();
 
    return (
@@ -49,7 +49,7 @@ const ActionButtonsCell = (props: Readonly<{ getValue: () => unknown }>) => {
 
 export default function Index() {
    const { pagination } = useTablePagination();
-   const { useList } = crudService(`/api/program`);
+   const { useList } = crudService(`/program`);
    const { data, isLoading } = useList<Response>({ pagination });
 
    if (isLoading) {

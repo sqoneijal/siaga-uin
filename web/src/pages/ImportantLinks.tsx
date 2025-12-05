@@ -16,7 +16,7 @@ const ImportantLinks = () => {
                   Kembali ke Beranda
                </button>
                <h1 className="text-4xl font-bold text-gray-900 mb-2">Link Penting</h1>
-               <p className="text-gray-600">Kumpulan tautan berguna untuk mahasiswa Universitas Syiah Kuala</p>
+               <p className="text-gray-600">Kumpulan tautan berguna untuk mahasiswa UIN Ar Raniry</p>
             </div>
 
             {/* Info Banner */}
@@ -82,7 +82,7 @@ const ImportantLinks = () => {
                      </li>
                      <li className="flex items-start">
                         <span className="text-blue-600 mr-2">•</span>
-                        <span>Satgas Senyar: senyar@UINAR.ac.id</span>
+                        <span>ar-raniry peduli: senyar@UINAR.ac.id</span>
                      </li>
                      <li className="flex items-start">
                         <span className="text-blue-600 mr-2">•</span>

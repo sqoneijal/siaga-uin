@@ -21,7 +21,7 @@ const onSuccess = (res: { status: boolean; message: string }) => {
 export default function Visi() {
    const [formData, setFormData] = useState<FormData>({});
 
-   const { useUpdate, useDetail } = crudService("/api/visi");
+   const { useUpdate, useDetail } = crudService("/visi");
    const { data, isLoading } = useDetail(1);
    const { mutate, isPending } = useUpdate();
 

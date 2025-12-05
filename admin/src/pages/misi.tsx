@@ -21,7 +21,7 @@ const onSuccess = (res: { status: boolean; message: string }) => {
 export default function Misi() {
    const [formData, setFormData] = useState<FormData>({});
 
-   const { useUpdate, useDetail } = crudService("/api/misi");
+   const { useUpdate, useDetail } = crudService("/misi");
    const { data, isLoading } = useDetail(1);
    const { mutate, isPending } = useUpdate();
 

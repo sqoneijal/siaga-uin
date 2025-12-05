@@ -13,7 +13,6 @@ import {
    SidebarRail,
 } from "@/components/ui/sidebar";
 import { VersionSwitcher } from "@/components/version-switcher";
-import type { Dispatch, SetStateAction } from "react";
 import * as React from "react";
 import { Link } from "react-router";
 import { NavUser } from "./nav-user";
@@ -47,7 +46,7 @@ const data = {
    ],
 };
 
-export function AppSidebar({ setIsLoggedIn, ...props }: { setIsLoggedIn: Dispatch<SetStateAction<boolean>> } & React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
    return (
       <Sidebar {...props}>
          <SidebarHeader>
@@ -74,7 +73,7 @@ export function AppSidebar({ setIsLoggedIn, ...props }: { setIsLoggedIn: Dispatc
             ))}
          </SidebarContent>
          <SidebarFooter>
-            <NavUser setIsLoggedIn={setIsLoggedIn} />
+            <NavUser />
          </SidebarFooter>
          <SidebarRail />
       </Sidebar>

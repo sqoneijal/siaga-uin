@@ -48,8 +48,9 @@ const About = () => {
                <span className="text-blue-600 font-semibold text-sm uppercase tracking-wider">Tentang Kami</span>
                <h2 className="text-4xl font-bold text-gray-900 mt-4 mb-6">Siaga UIN Ar Raniry</h2>
                <p className="text-lg text-gray-600">
-                  Satuan Tugas Senyar adalah program inisiatif dari Universitas Syiah Kuala yang bertujuan untuk memberikan dukungan dan bantuan
-                  kepada mahasiswa yang mengalami kesulitan dalam menjalani perkuliahan.
+                  Taskforce Siaga UIN Ar-Raniry hadir untuk memberikan dukungan dan bantuan kepada mahasiswa serta masyarakat yang terdampak bencana
+                  banjir dan tanah longsor tahun 2025. Inisiatif ini bertujuan memastikan tidak ada mahasiswa yang mengalami hambatan dalam proses
+                  perkuliahan serta meringankan beban penderitaan yang dialami para korban.
                </p>
             </div>
 

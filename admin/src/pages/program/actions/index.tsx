@@ -27,7 +27,7 @@ export default function Index() {
 
    const navigate = useNavigate();
 
-   const { useCreate, useDetail, useUpdate } = crudService("/api/program");
+   const { useCreate, useDetail, useUpdate } = crudService("/program");
    const { mutate: createMutate, isPending: isPendingCreate } = useCreate();
    const { data, isLoading } = useDetail(id);
    const { mutate: updateMutate, isPending: isPendingUpdate } = useUpdate();
