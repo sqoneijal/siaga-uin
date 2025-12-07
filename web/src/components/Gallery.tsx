@@ -1,5 +1,4 @@
 import { crudService } from "@/lib/crudService";
-import { gallery } from "@/mockData";
 import { X } from "lucide-react";
 import { useState } from "react";
 
@@ -11,8 +10,24 @@ interface GalleryItem {
 }
 
 type Response = {
-   results: Array<Record<string, string>>;
+   results: Array<{
+      id: number;
+      judul: string | null;
+      link_folder_drive: string | null;
+      galleri_detail: Array<{
+         id: number;
+         path: string | null;
+      }>;
+   }>;
 };
+
+function convertDriveToImage(url: string) {
+   const match = new RegExp(/\/d\/(.*?)\//).exec(url);
+   if (!match) return null;
+
+   const id = match[1];
+   return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
+}
 
 const Gallery = () => {
    const { useList } = crudService("/galleri/new");
@@ -21,20 +36,23 @@ const Gallery = () => {
    const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
    const [selectedCategory, setSelectedCategory] = useState("Semua");
 
-   const filteredGallery = selectedCategory === "Semua" ? gallery : gallery.filter((item) => item.category === selectedCategory);
-
    if (isLoading) {
       return <div>loading...</div>;
    }
 
    const categories = ["Semua"];
+   const categorySet = new Set<string>();
    if (data?.results) {
       for (const item of data.results) {
-         categories.push(item.judul);
-
-         console.log(item.link_folder_drive);
+         if (item.judul) {
+            categorySet.add(item.judul);
+         }
       }
    }
+   categories.push(...Array.from(categorySet));
+
+   const filteredGalleri =
+      selectedCategory === "Semua" ? data?.results ?? [] : data?.results?.filter((galleri) => galleri.judul === selectedCategory) ?? [];
 
    return (
       <section id="gallery" className="py-20 bg-gray-50">
@@ -62,41 +80,51 @@ const Gallery = () => {
 
             {/* Gallery Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-               {filteredGallery.map((item) => (
-                  <div
-                     key={item.id}
-                     className="relative group cursor-pointer overflow-hidden rounded-xl aspect-square"
-                     onClick={() => setSelectedImage(item)}>
-                     <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                     />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
-                           <h4 className="text-white font-semibold">{item.title}</h4>
-                           <p className="text-white/80 text-sm">{item.category}</p>
-                        </div>
-                     </div>
-                  </div>
-               ))}
+               {filteredGalleri?.map((galleri) =>
+                  galleri?.galleri_detail?.map((item) => {
+                     return (
+                        <button
+                           key={item?.id}
+                           className="relative group cursor-pointer overflow-hidden rounded-xl aspect-square bg-none border-none p-0"
+                           onClick={() =>
+                              setSelectedImage({
+                                 id: item?.id || 0,
+                                 image: convertDriveToImage(item?.path || "") || "",
+                                 title: galleri?.judul || "",
+                                 category: galleri?.judul || "",
+                              })
+                           }>
+                           <img
+                              src={convertDriveToImage(item?.path || "") || ""}
+                              alt="Galeri dokumentasi kegiatan"
+                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                           />
+                        </button>
+                     );
+                  })
+               )}
             </div>
          </div>
 
          {/* Modal */}
          {selectedImage && (
-            <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={() => setSelectedImage(null)}>
-               <button className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors" onClick={() => setSelectedImage(null)}>
+            <button
+               className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+               onClick={() => setSelectedImage(null)}
+               onKeyDown={(e) => e.key === "Escape" && setSelectedImage(null)}
+               tabIndex={-1}>
+               <button
+                  className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+                  onClick={(e) => {
+                     e.stopPropagation();
+                     setSelectedImage(null);
+                  }}>
                   <X className="w-8 h-8" />
                </button>
-               <div className="max-w-4xl w-full">
+               <button className="max-w-4xl w-full bg-none border-none p-0 cursor-default" onClick={(e) => e.stopPropagation()}>
                   <img src={selectedImage.image} alt={selectedImage.title} className="w-full h-auto rounded-lg" />
-                  <div className="text-white mt-4 text-center">
-                     <h3 className="text-2xl font-bold">{selectedImage.title}</h3>
-                     <p className="text-gray-300">{selectedImage.category}</p>
-                  </div>
-               </div>
-            </div>
+               </button>
+            </button>
          )}
       </section>
    );

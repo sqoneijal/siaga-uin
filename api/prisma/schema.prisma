@@ -34,14 +34,14 @@ model tb_galleri {
   id                Int                 @id(map: "tb_galleri_pk") @default(autoincrement())
   judul             String?             @db.VarChar
   link_folder_drive String?             @db.VarChar
-  tb_galleri_detail tb_galleri_detail[]
+  galleri_detail    tb_galleri_detail[]
 }
 
 model tb_galleri_detail {
   id         Int         @id(map: "tb_galleri_detail_pk") @default(autoincrement())
   id_galleri Int?
   path       String?     @db.VarChar
-  tb_galleri tb_galleri? @relation(fields: [id_galleri], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "tb_galleri_detail_tb_galleri_fk")
+  galleri    tb_galleri? @relation(fields: [id_galleri], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "tb_galleri_detail_tb_galleri_fk")
 
   @@index([id_galleri])
 }

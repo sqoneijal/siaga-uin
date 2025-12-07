@@ -1,1 +1,0 @@
--  [x] Edit api/src/routes/galleri.ts to add conditional check for extract_link in the map function
