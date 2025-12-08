@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router";
 import { Card, CardDescription, CardHeader, CardTitle } from "./components/ui/card";
+import Berita from "./pages/berita";
+import BeritaActions from "./pages/berita/actions";
 import Galleri from "./pages/galleri";
 import GalleriActions from "./pages/galleri/actions";
 import LinkPendataan from "./pages/link-pendataan";
@@ -30,6 +32,9 @@ export default function Routing() {
          <Route path="/misi" element={<Misi />} />
          <Route path="/galleri" element={<Galleri />} />
          <Route path="/galleri/actions" element={<GalleriActions />} />
+         <Route path="/berita" element={<Berita />} />
+         <Route path="/berita/actions" element={<BeritaActions />} />
+         <Route path="/berita/actions/:id" element={<BeritaActions />} />
       </Routes>
    );
 }

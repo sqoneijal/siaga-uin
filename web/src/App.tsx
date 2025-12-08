@@ -8,6 +8,7 @@ import ImportantLinks from "@/pages/ImportantLinks";
 import ReceiverReport from "@/pages/ReceiverReport";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import BeritaDetail from "./pages/berita/detail";
 
 function App() {
    return (
@@ -20,6 +21,8 @@ function App() {
                <Route path="/laporan-penyaluran" element={<DistributionReport />} />
                <Route path="/pengumuman" element={<Announcements />} />
                <Route path="/link-penting" element={<ImportantLinks />} />
+               <Route path="/link-penting" element={<ImportantLinks />} />
+               <Route path="/berita/:id" element={<BeritaDetail />} />
             </Routes>
             <Footer />
             <Toaster />

@@ -45,6 +45,10 @@ const data = {
                title: "Galleri",
                url: "/galleri",
             },
+            {
+               title: "Berita",
+               url: "/berita",
+            },
          ],
       },
       {

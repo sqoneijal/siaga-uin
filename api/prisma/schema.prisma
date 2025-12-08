@@ -45,3 +45,12 @@ model tb_galleri_detail {
 
   @@index([id_galleri])
 }
+
+model tb_berita {
+  id        Int       @id(map: "tb_berita_pk") @default(autoincrement())
+  judul     String?   @db.VarChar
+  content   String?
+  uploaded  DateTime? @db.Timestamp(6)
+  modified  DateTime? @db.Timestamp(6)
+  thumbnail String?   @db.VarChar
+}

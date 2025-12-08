@@ -11,12 +11,12 @@ import { toast } from "sonner";
 const ActionButtons = ({ id }: Readonly<{ id: string | number }>) => {
    const navigate = useNavigate();
 
-   const { useDelete } = crudService("/galleri");
+   const { useDelete } = crudService("/berita");
    const { mutate, isPending } = useDelete();
 
    return (
       <>
-         <Button size="icon-sm" className="size-6" variant="outline" onClick={() => navigate(`/galleri/actions/${id}`)}>
+         <Button size="icon-sm" className="size-6" variant="outline" onClick={() => navigate(`/berita/actions/${id}`)}>
             <SquarePen />
          </Button>
          <Button
@@ -49,7 +49,7 @@ type Response = {
 
 export default function Index() {
    const { pagination } = useTablePagination();
-   const { useList } = crudService(`/galleri`);
+   const { useList } = crudService(`/berita`);
    const { data, isLoading } = useList<Response>({ pagination });
 
    if (isLoading) {
@@ -59,11 +59,11 @@ export default function Index() {
    return (
       <Card>
          <CardHeader>
-            <CardTitle>Galleri</CardTitle>
-            <CardDescription>Daftar Galleri</CardDescription>
+            <CardTitle>Berita</CardTitle>
+            <CardDescription>Daftar Berita</CardDescription>
             <CardAction>
                <Button asChild variant="outline">
-                  <Link to="/galleri/actions">Tambah</Link>
+                  <Link to="/berita/actions">Tambah</Link>
                </Button>
             </CardAction>
          </CardHeader>

@@ -1,7 +1,7 @@
 import cors from "cors";
 import express, { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import routes from "./routes";
+import routes from "./routes/index";
 
 const app = express();
 
