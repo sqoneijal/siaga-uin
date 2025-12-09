@@ -3,28 +3,47 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { receiverReports } from "@/mockData";
-import { ArrowLeft, Download, Search } from "lucide-react";
-import { useState } from "react";
+import { crudService } from "@/lib/crudService";
+import { ArrowLeft, Search } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+type Response = {
+   results: Array<Record<string, string>>;
+   total: number;
+   totalPenerimaan: string;
+};
+
+const formatRupiah = (value: string) => {
+   const num = Number.parseFloat(value) || 0;
+   return num.toLocaleString("id-ID", { style: "currency", currency: "IDR" });
+};
 
 const ReceiverReport = () => {
    const navigate = useNavigate();
    const [searchTerm, setSearchTerm] = useState("");
-   const [filterProgram, setFilterProgram] = useState("Semua");
+   const [currentPage, setCurrentPage] = useState(1);
 
-   const programs = ["Semua", "Bantuan Finansial", "Beasiswa Prestasi", "Bantuan Darurat", "Bantuan Kesehatan", "Pelatihan & Keterampilan"];
-
-   const filteredReports = receiverReports?.filter((report) => {
-      const matchSearch = report?.name.toLowerCase().includes(searchTerm.toLowerCase()) || report.nim.includes(searchTerm);
-      const matchProgram = filterProgram === "Semua" || report?.program === filterProgram;
-      return matchSearch && matchProgram;
+   const [pagination, setPagination] = useState({
+      limit: "35",
+      offset: "0",
    });
 
-   const handleExport = () => {
-      console.log("Exporting data...");
-      alert("Data sedang diunduh...");
-   };
+   useEffect(() => {
+      setPagination((prev) => ({
+         ...prev,
+         offset: ((currentPage - 1) * Number.parseInt(pagination.limit)).toString(),
+      }));
+   }, [currentPage, pagination.limit]);
+
+   useEffect(() => {
+      setCurrentPage(1);
+   }, [searchTerm]);
+
+   const params = { ...pagination, search: searchTerm };
+   const { useList } = crudService(`/laporan/penerimaan?${new URLSearchParams(params).toString()}`);
+   const { data } = useList<Response>();
+   const total = data?.total || 0;
 
    return (
       <div className="min-h-screen bg-gray-50 pt-20">
@@ -35,7 +54,7 @@ const ReceiverReport = () => {
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Kembali ke Beranda
                </button>
-               <h1 className="text-4xl font-bold text-gray-900 mb-2">Laporan Penerimaan Bantuan</h1>
+               <h1 className="text-4xl font-bold text-gray-900 mb-2">Laporan Penerima Bantuan</h1>
                <p className="text-gray-600">Data mahasiswa yang telah menerima bantuan dari Siaga UIN Ar Raniry</p>
             </div>
 
@@ -54,24 +73,6 @@ const ReceiverReport = () => {
                            />
                         </div>
                      </div>
-
-                     <div className="flex gap-3 w-full md:w-auto">
-                        <select
-                           value={filterProgram}
-                           onChange={(e) => setFilterProgram(e.target.value)}
-                           className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                           {programs.map((program) => (
-                              <option key={program} value={program}>
-                                 {program}
-                              </option>
-                           ))}
-                        </select>
-
-                        <Button onClick={handleExport} className="bg-green-600 hover:bg-green-700">
-                           <Download className="w-4 h-4 mr-2" />
-                           Export
-                        </Button>
-                     </div>
                   </div>
                </CardContent>
             </Card>
@@ -81,25 +82,13 @@ const ReceiverReport = () => {
                <Card>
                   <CardContent className="p-6">
                      <div className="text-sm text-gray-600 mb-1">Total Penerima</div>
-                     <div className="text-3xl font-bold text-gray-900">{receiverReports.length}</div>
+                     <div className="text-3xl font-bold text-gray-900">{data?.total}</div>
                   </CardContent>
                </Card>
                <Card>
                   <CardContent className="p-6">
                      <div className="text-sm text-gray-600 mb-1">Total Dana</div>
-                     <div className="text-3xl font-bold text-green-600">Rp 22,5M</div>
-                  </CardContent>
-               </Card>
-               <Card>
-                  <CardContent className="p-6">
-                     <div className="text-sm text-gray-600 mb-1">Program Aktif</div>
-                     <div className="text-3xl font-bold text-blue-600">6</div>
-                  </CardContent>
-               </Card>
-               <Card>
-                  <CardContent className="p-6">
-                     <div className="text-sm text-gray-600 mb-1">Status</div>
-                     <div className="text-3xl font-bold text-green-600">Aktif</div>
+                     <div className="text-3xl font-bold text-green-600">{formatRupiah(String(data?.totalPenerimaan))}</div>
                   </CardContent>
                </Card>
             </div>
@@ -120,34 +109,46 @@ const ReceiverReport = () => {
                               <TableHead>Fakultas</TableHead>
                               <TableHead>Program</TableHead>
                               <TableHead>Nominal</TableHead>
-                              <TableHead>Tanggal</TableHead>
-                              <TableHead>Status</TableHead>
                            </TableRow>
                         </TableHeader>
                         <TableBody>
-                           {filteredReports.map((report, index) => (
+                           {data?.results?.map((report, index) => (
                               <TableRow key={report.id}>
-                                 <TableCell>{index + 1}</TableCell>
-                                 <TableCell className="font-medium">{report.name}</TableCell>
-                                 <TableCell>{report.nim}</TableCell>
-                                 <TableCell>{report.faculty}</TableCell>
+                                 <TableCell>{(currentPage - 1) * Number.parseInt(pagination.limit) + index + 1}</TableCell>
+                                 <TableCell className="font-medium">{report.nim}</TableCell>
+                                 <TableCell className="font-medium">{report.nama}</TableCell>
+                                 <TableCell>{report.fakultas}</TableCell>
                                  <TableCell>
                                     <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                                       {report.program}
+                                       {report.prodi}
                                     </Badge>
                                  </TableCell>
-                                 <TableCell className="font-semibold text-green-600">{report.amount}</TableCell>
-                                 <TableCell>{report.date}</TableCell>
-                                 <TableCell>
-                                    <Badge className="bg-green-100 text-green-700 hover:bg-green-100">{report.status}</Badge>
-                                 </TableCell>
+                                 <TableCell className="font-semibold text-green-600">{formatRupiah(report.nominal)}</TableCell>
                               </TableRow>
                            ))}
                         </TableBody>
                      </Table>
                   </div>
 
-                  {filteredReports.length === 0 && <div className="text-center py-12 text-gray-500">Tidak ada data yang ditemukan</div>}
+                  {/* Pagination */}
+                  {total > 0 && (
+                     <div className="flex justify-between items-center mt-4">
+                        <Button variant="outline" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage <= 1}>
+                           Previous
+                        </Button>
+                        <span className="text-sm text-gray-600">
+                           Page {currentPage} of {Math.ceil(total / Number.parseInt(pagination.limit))}
+                        </span>
+                        <Button
+                           variant="outline"
+                           onClick={() => setCurrentPage(currentPage + 1)}
+                           disabled={currentPage >= Math.ceil(total / Number.parseInt(pagination.limit))}>
+                           Next
+                        </Button>
+                     </div>
+                  )}
+
+                  {total === 0 && <div className="text-center py-12 text-gray-500">Tidak ada data yang ditemukan</div>}
                </CardContent>
             </Card>
          </div>

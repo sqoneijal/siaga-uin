@@ -56,7 +56,7 @@ const data = {
          url: "#",
          items: [
             {
-               title: "Penerimaan",
+               title: "Penerima",
                url: "/laporan/penerimaan",
             },
             {

@@ -61,6 +61,6 @@ model tb_penerimaan {
   nama     String?   @db.VarChar
   fakultas String?   @db.VarChar
   prodi    String?   @db.VarChar
-  nominal  String?   @db.VarChar
+  nominal  Decimal?  @db.Decimal
   tanggal  DateTime? @db.Date
 }

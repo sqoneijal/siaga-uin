@@ -38,7 +38,7 @@ const Navbar = () => {
    ];
 
    const laporanItems: Array<NavItem> = [
-      { label: "Penerimaan", href: "/laporan-penerimaan" },
+      { label: "Penerima", href: "/laporan-penerimaan" },
       { label: "Penyaluran", href: "/laporan-penyaluran" },
    ];
 

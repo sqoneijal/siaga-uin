@@ -55,18 +55,30 @@ router.delete("/:id", async (req: Request, res: Response) => {
 
 router.get("/", async (req: Request, res: Response) => {
    try {
-      const { limit, offset } = req.query as any;
+      const { limit, offset, search } = req.query as any;
 
-      const [results, total] = await Promise.all([
+      const whereClause = search
+         ? {
+              OR: [{ nama: { contains: search, mode: "insensitive" as const } }, { nim: { contains: search, mode: "insensitive" as const } }],
+           }
+         : {};
+
+      const [results, total, totalPenerimaan] = await Promise.all([
          prisma.tb_penerimaan.findMany({
+            where: whereClause,
             take: Number.parseInt(limit),
             skip: Number.parseInt(offset),
             orderBy: { id: "desc" },
          }),
-         prisma.tb_penerimaan.count(),
+         prisma.tb_penerimaan.count({ where: whereClause }),
+         prisma.tb_penerimaan.aggregate({
+            _sum: {
+               nominal: true,
+            },
+         }),
       ]);
 
-      res.json({ results, total });
+      res.json({ results, total, totalPenerimaan: totalPenerimaan._sum.nominal ?? 0 });
    } catch (error) {
       res.status(500).json({ message: (error as Error)?.message });
    }

@@ -175,8 +175,8 @@ export default function Index() {
    return (
       <Card>
          <CardHeader>
-            <CardTitle>Laporan Penerimaan</CardTitle>
-            <CardDescription>Daftar Laporan Penerimaan</CardDescription>
+            <CardTitle>Laporan Penerima</CardTitle>
+            <CardDescription>Daftar Laporan Penerima</CardDescription>
             <CardAction>
                <ButtonGroup>
                   <Button variant="outline" onClick={downloadTemplate}>
