@@ -54,3 +54,13 @@ model tb_berita {
   modified  DateTime? @db.Timestamp(6)
   thumbnail String?   @db.VarChar
 }
+
+model tb_penerimaan {
+  id       Int       @id(map: "tb_penerimaan_pk") @default(autoincrement())
+  nim      String?   @db.VarChar
+  nama     String?   @db.VarChar
+  fakultas String?   @db.VarChar
+  prodi    String?   @db.VarChar
+  nominal  String?   @db.VarChar
+  tanggal  DateTime? @db.Date
+}
