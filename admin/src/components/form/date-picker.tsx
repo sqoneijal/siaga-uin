@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon } from "lucide-react";
+import moment from "moment";
 import * as React from "react";
 import { v4 } from "uuid";
 
@@ -26,7 +27,7 @@ export default function DatePicker({
          <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
                <Button variant="outline" id={id} className="w-50 justify-between font-normal">
-                  {date ? date.toLocaleDateString() : `Pilih ${label}`}
+                  {value ? moment(value).format("DD-MM-YYYY") : `Pilih ${label}`}
                   <ChevronDownIcon />
                </Button>
             </PopoverTrigger>

@@ -7,7 +7,7 @@ import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle }
 import { Spinner } from "@/components/ui/spinner";
 import { crudService } from "@/lib/crudService";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
 
@@ -17,7 +17,7 @@ type FormData = {
    id_program?: string;
    jumlah_penerima?: string;
    total_dana?: string;
-   tanggal?: Date;
+   tanggal?: Date | string;
 };
 
 export default function Index() {
@@ -29,11 +29,22 @@ export default function Index() {
    const { useList } = crudService("/laporan/penyaluran/program");
    const { data: daftarProgram, isLoading } = useList<Array<DaftarProgram>>();
 
-   const { useCreate, useUpdate } = crudService<any, Record<string, any>, Record<string, any>>("/laporan/penyaluran");
+   const { useCreate, useUpdate, useDetail } = crudService("/laporan/penyaluran");
    const { mutate: handleCreate, isPending: isPendingCreate } = useCreate();
    const { mutate: handleUpdate, isPending: isPendingUpdate } = useUpdate();
+   const { data, isLoading: isLoadingDetail } = useDetail(id);
 
    const [formData, setFormData] = useState<FormData>({});
+
+   useEffect(() => {
+      if (!isLoadingDetail && data) {
+         setFormData({
+            ...data,
+            tanggal: (data as FormData).tanggal ? moment((data as FormData)?.tanggal).format("YYYY-MM-DD") : undefined,
+         });
+      }
+      return () => {};
+   }, [isLoadingDetail, data]);
 
    const onSuccess = (res: { status: boolean; message: string }) => {
       const { status, message } = res;
@@ -48,16 +59,21 @@ export default function Index() {
    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
+      const payload = { ...formData, tanggal: formData.tanggal ? moment(formData?.tanggal).format("YYYY-MM-DD") : undefined };
+
       if (isEdit) {
-         handleUpdate({ ...formData, tanggal: formData.tanggal ? moment(formData?.tanggal).format("YYYY-MM-DD") : null, id }, { onSuccess });
+         handleUpdate({ ...payload, id }, { onSuccess });
       } else {
-         handleCreate({ ...formData, tanggal: formData.tanggal ? moment(formData?.tanggal).format("YYYY-MM-DD") : null }, { onSuccess });
+         handleCreate(payload, { onSuccess });
       }
    };
 
-   if (isLoading) {
+   if (isLoading || isLoadingDetail) {
       return <div>loading...</div>;
    }
+
+   const findTanggal = typeof formData.tanggal === "string" ? new Date(formData.tanggal) : formData.tanggal;
+   const tanggal = formData?.tanggal ? findTanggal : undefined;
 
    return (
       <Card>
@@ -103,7 +119,7 @@ export default function Index() {
                <DatePicker
                   divClassName="col-12 col-md-6"
                   label="Tanggal"
-                  value={formData?.tanggal}
+                  value={tanggal}
                   onChange={(date) => setFormData({ ...formData, tanggal: date })}
                />
             </div>

@@ -90,4 +90,20 @@ router.get("/", async (req: Request, res: Response) => {
    }
 });
 
+router.get("/:id", async (req: Request, res: Response) => {
+   try {
+      const { id } = req.params;
+
+      const results = await prisma.tb_penyaluran.findUnique({
+         where: {
+            id: Number.parseInt(id),
+         },
+      });
+
+      res.json(results);
+   } catch (error) {
+      res.status(500).json({ message: (error as Error)?.message });
+   }
+});
+
 export default router;

@@ -22,7 +22,7 @@ const ActionButtons = ({ id }: Readonly<{ id: string | number }>) => {
 
    return (
       <>
-         <Button size="icon-sm" className="size-6" variant="outline" onClick={() => navigate(`/program/actions/${id}`)}>
+         <Button size="icon-sm" className="size-6" variant="outline" onClick={() => navigate(`/laporan/penyaluran/actions/${id}`)}>
             <SquarePen />
          </Button>
          <Button
@@ -78,7 +78,7 @@ export default function Index() {
                      meta: { className: "w-[110px]" },
                   },
                   {
-                     accessorKey: "id_program",
+                     accessorKey: "program.judul",
                      header: "program",
                   },
                   {
