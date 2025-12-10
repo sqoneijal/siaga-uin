@@ -13,11 +13,12 @@ model tb_link_pendataan {
 }
 
 model tb_program {
-  id       Int       @id(map: "tb_program_pk") @default(autoincrement())
-  judul    String?   @db.VarChar
-  content  String?
-  uploaded DateTime? @db.Timestamp(6)
-  modified DateTime? @db.Timestamp(6)
+  id            Int             @id(map: "tb_program_pk") @default(autoincrement())
+  judul         String?         @db.VarChar
+  content       String?
+  uploaded      DateTime?       @db.Timestamp(6)
+  modified      DateTime?       @db.Timestamp(6)
+  tb_penyaluran tb_penyaluran[]
 }
 
 model tb_misi {
@@ -63,4 +64,16 @@ model tb_penerimaan {
   prodi    String?   @db.VarChar
   nominal  Decimal?  @db.Decimal
   tanggal  DateTime? @db.Date
+}
+
+model tb_penyaluran {
+  id              Int         @id(map: "tb_penyaluran_pk") @default(autoincrement())
+  id_program      Int?
+  jumlah_penerima Decimal?    @db.Decimal
+  total_dana      Decimal?    @db.Decimal
+  tanggal         DateTime?   @db.Date
+  uploaded        DateTime?   @db.Timestamp(6)
+  program         tb_program? @relation(fields: [id_program], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "tb_penyaluran_tb_program_fk")
+
+  @@index([id_program])
 }

@@ -2,6 +2,7 @@ import { Router } from "express";
 import berita from "./berita";
 import galleri from "./galleri";
 import laporanPenerimaan from "./laporan/penerimaan";
+import laporanPenyaluran from "./laporan/penyaluran";
 import linkPendataan from "./link-pendataan";
 import login from "./login";
 import misi from "./misi";
@@ -18,6 +19,7 @@ router.use("/login", login);
 router.use("/galleri", galleri);
 router.use("/berita", berita);
 router.use("/laporan/penerimaan", laporanPenerimaan);
+router.use("/laporan/penyaluran", laporanPenyaluran);
 
 // Health check
 router.get("/health", (req, res) => {

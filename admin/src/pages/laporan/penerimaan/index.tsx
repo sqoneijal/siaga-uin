@@ -132,7 +132,7 @@ export default function Index() {
       ];
 
       await writeXlsxFile([HEADER_ROW, DATA_ROW_1, DATA_ROW_2] as Array<Array<Cell>>, {
-         fileName: "file.xlsx",
+         fileName: "laporan_penerima.xlsx",
       });
    };
 
