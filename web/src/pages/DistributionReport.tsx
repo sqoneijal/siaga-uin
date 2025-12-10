@@ -2,27 +2,59 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { distributionReports } from "@/mockData";
-import { ArrowLeft, DollarSign, Download, TrendingUp } from "lucide-react";
-import { useState } from "react";
+import { crudService } from "@/lib/crudService";
+import { ArrowLeft, DollarSign, TrendingUp } from "lucide-react";
+import moment from "moment";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+type Report = {
+   id: string;
+   program: {
+      id: string;
+      judul: string;
+   };
+   jumlah_penerima: string;
+   total_dana: string;
+   tanggal: string;
+};
+
+type Response = {
+   results: Array<Report>;
+   total: number;
+   jumlah_penerima: string;
+   total_dana: string;
+   jumlah_program: string;
+};
+const formatRupiah = (value: string) => {
+   const num = Number.parseFloat(value) || 0;
+   return num.toLocaleString("id-ID", { style: "currency", currency: "IDR" });
+};
 
 const DistributionReport = () => {
    const navigate = useNavigate();
-   const [selectedPeriod, setSelectedPeriod] = useState("Semua");
 
-   const periods = ["Semua", "Januari 2024", "Desember 2023"];
+   const [currentPage, setCurrentPage] = useState(1);
 
-   const filteredReports =
-      selectedPeriod === "Semua" ? distributionReports : distributionReports.filter((report) => report.period === selectedPeriod);
+   const [pagination, setPagination] = useState({
+      limit: "35",
+      offset: "0",
+   });
 
-   const totalRecipients = filteredReports.reduce((sum, report) => sum + report.totalRecipients, 0);
-   const totalAmount = "Rp 487.500.000";
+   useEffect(() => {
+      setPagination((prev) => ({
+         ...prev,
+         offset: ((currentPage - 1) * Number.parseInt(pagination.limit)).toString(),
+      }));
+   }, [currentPage, pagination.limit]);
 
-   const handleExport = () => {
-      console.log("Exporting distribution data...");
-      alert("Data sedang diunduh...");
-   };
+   const params = { ...pagination };
+   const { useList } = crudService(`/laporan/penyaluran?${new URLSearchParams(params).toString()}`);
+   const { data } = useList<Response>();
+   const total = data?.total || 0;
+
+   const { useList: dataTotal } = crudService("/laporan/penyaluran/total");
+   const { data: totalData } = dataTotal<Response>();
 
    return (
       <div className="min-h-screen bg-gray-50 pt-20">
@@ -37,31 +69,6 @@ const DistributionReport = () => {
                <p className="text-gray-600">Ringkasan penyaluran bantuan per program dan periode</p>
             </div>
 
-            {/* Filter & Actions */}
-            <Card className="mb-6">
-               <CardContent className="p-6">
-                  <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-                     <div className="flex gap-3">
-                        <select
-                           value={selectedPeriod}
-                           onChange={(e) => setSelectedPeriod(e.target.value)}
-                           className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                           {periods.map((period) => (
-                              <option key={period} value={period}>
-                                 {period}
-                              </option>
-                           ))}
-                        </select>
-                     </div>
-
-                     <Button onClick={handleExport} className="bg-green-600 hover:bg-green-700">
-                        <Download className="w-4 h-4 mr-2" />
-                        Export Laporan
-                     </Button>
-                  </div>
-               </CardContent>
-            </Card>
-
             {/* Summary Cards */}
             <div className="grid md:grid-cols-3 gap-6 mb-6">
                <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white">
@@ -69,7 +76,7 @@ const DistributionReport = () => {
                      <div className="flex items-center justify-between">
                         <div>
                            <div className="text-blue-100 text-sm mb-1">Total Penerima</div>
-                           <div className="text-4xl font-bold">{totalRecipients}</div>
+                           <div className="text-4xl font-bold">{totalData?.jumlah_penerima}</div>
                            <div className="text-blue-100 text-xs mt-1">Mahasiswa</div>
                         </div>
                         <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center">
@@ -84,7 +91,7 @@ const DistributionReport = () => {
                      <div className="flex items-center justify-between">
                         <div>
                            <div className="text-green-100 text-sm mb-1">Total Dana</div>
-                           <div className="text-3xl font-bold">{totalAmount}</div>
+                           <div className="text-3xl font-bold">{formatRupiah(String(totalData?.total_dana))}</div>
                            <div className="text-green-100 text-xs mt-1">Tersalurkan</div>
                         </div>
                         <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center">
@@ -99,7 +106,7 @@ const DistributionReport = () => {
                      <div className="flex items-center justify-between">
                         <div>
                            <div className="text-purple-100 text-sm mb-1">Jenis Program</div>
-                           <div className="text-4xl font-bold">6</div>
+                           <div className="text-4xl font-bold">{totalData?.jumlah_program}</div>
                            <div className="text-purple-100 text-xs mt-1">Program Aktif</div>
                         </div>
                         <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center">
@@ -121,39 +128,51 @@ const DistributionReport = () => {
                         <TableHeader>
                            <TableRow>
                               <TableHead>No</TableHead>
-                              <TableHead>Periode</TableHead>
                               <TableHead>Jenis Program</TableHead>
                               <TableHead>Jumlah Penerima</TableHead>
                               <TableHead>Total Dana</TableHead>
                               <TableHead>Tanggal</TableHead>
-                              <TableHead>Status</TableHead>
                            </TableRow>
                         </TableHeader>
                         <TableBody>
-                           {filteredReports.map((report, index) => (
+                           {data?.results?.map((report, index) => (
                               <TableRow key={report.id}>
                                  <TableCell>{index + 1}</TableCell>
-                                 <TableCell className="font-medium">{report.period}</TableCell>
                                  <TableCell>
                                     <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                                       {report.programType}
+                                       {report.program.judul}
                                     </Badge>
                                  </TableCell>
                                  <TableCell>
-                                    <span className="font-semibold">{report.totalRecipients}</span> Mahasiswa
+                                    <span className="font-semibold">{report.jumlah_penerima}</span> Mahasiswa
                                  </TableCell>
-                                 <TableCell className="font-bold text-green-600">{report.totalAmount}</TableCell>
-                                 <TableCell>{report.date}</TableCell>
-                                 <TableCell>
-                                    <Badge className="bg-green-100 text-green-700 hover:bg-green-100">{report.status}</Badge>
-                                 </TableCell>
+                                 <TableCell className="font-bold text-green-600">{formatRupiah(report.total_dana)}</TableCell>
+                                 <TableCell>{moment(report.tanggal).format("DD-MM-YYYYY")}</TableCell>
                               </TableRow>
                            ))}
                         </TableBody>
                      </Table>
                   </div>
 
-                  {filteredReports.length === 0 && <div className="text-center py-12 text-gray-500">Tidak ada data untuk periode yang dipilih</div>}
+                  {/* Pagination */}
+                  {total > 0 && (
+                     <div className="flex justify-between items-center mt-4">
+                        <Button variant="outline" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage <= 1}>
+                           Previous
+                        </Button>
+                        <span className="text-sm text-gray-600">
+                           Page {currentPage} of {Math.ceil(total / Number.parseInt(pagination.limit))}
+                        </span>
+                        <Button
+                           variant="outline"
+                           onClick={() => setCurrentPage(currentPage + 1)}
+                           disabled={currentPage >= Math.ceil(total / Number.parseInt(pagination.limit))}>
+                           Next
+                        </Button>
+                     </div>
+                  )}
+
+                  {total === 0 && <div className="text-center py-12 text-gray-500">Tidak ada data untuk periode yang dipilih</div>}
                </CardContent>
             </Card>
 

@@ -90,6 +90,28 @@ router.get("/", async (req: Request, res: Response) => {
    }
 });
 
+router.get("/total", async (req: Request, res: Response) => {
+   try {
+      const [jumlah_penerima, total_dana, jumlah_program] = await Promise.all([
+         prisma.tb_penyaluran.aggregate({
+            _sum: {
+               jumlah_penerima: true,
+            },
+         }),
+         prisma.tb_penyaluran.aggregate({
+            _sum: {
+               total_dana: true,
+            },
+         }),
+         prisma.tb_program.count(),
+      ]);
+
+      res.json({ jumlah_penerima: jumlah_penerima._sum.jumlah_penerima ?? 0, total_dana: total_dana._sum.total_dana ?? 0, jumlah_program });
+   } catch (error) {
+      res.status(500).json({ message: (error as Error)?.message });
+   }
+});
+
 router.get("/:id", async (req: Request, res: Response) => {
    try {
       const { id } = req.params;
