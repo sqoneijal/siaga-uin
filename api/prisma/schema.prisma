@@ -77,3 +77,10 @@ model tb_penyaluran {
 
   @@index([id_program])
 }
+
+model tb_link_penting {
+  id         Int     @id(map: "tb_link_penting_pk") @default(autoincrement())
+  nama       String? @db.VarChar
+  keterangan String? @db.VarChar
+  link       String? @db.VarChar
+}

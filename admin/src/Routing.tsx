@@ -4,6 +4,8 @@ import Berita from "./pages/berita";
 import BeritaActions from "./pages/berita/actions";
 import Galleri from "./pages/galleri";
 import GalleriActions from "./pages/galleri/actions";
+import LinkPenting from "./pages/informasi/link-penting";
+import LinkPentingActions from "./pages/informasi/link-penting/actions";
 import LaporanPenerimaan from "./pages/laporan/penerimaan";
 import LaporanPenyaluran from "./pages/laporan/penyaluran";
 import LaporanPenyaluranActions from "./pages/laporan/penyaluran/actions";
@@ -42,6 +44,9 @@ export default function Routing() {
          <Route path="/laporan/penyaluran" element={<LaporanPenyaluran />} />
          <Route path="/laporan/penyaluran/actions" element={<LaporanPenyaluranActions />} />
          <Route path="/laporan/penyaluran/actions/:id" element={<LaporanPenyaluranActions />} />
+         <Route path="/informasi/link-penting" element={<LinkPenting />} />
+         <Route path="/informasi/link-penting/actions" element={<LinkPentingActions />} />
+         <Route path="/informasi/link-penting/actions/:id" element={<LinkPentingActions />} />
       </Routes>
    );
 }
