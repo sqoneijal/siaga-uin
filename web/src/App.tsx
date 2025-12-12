@@ -9,6 +9,7 @@ import ReceiverReport from "@/pages/ReceiverReport";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import BeritaDetail from "./pages/berita/detail";
+import ProgramDetail from "./pages/program/detail";
 
 function App() {
    return (
@@ -23,6 +24,7 @@ function App() {
                <Route path="/link-penting" element={<ImportantLinks />} />
                <Route path="/link-penting" element={<ImportantLinks />} />
                <Route path="/berita/:id" element={<BeritaDetail />} />
+               <Route path="/program/:id" element={<ProgramDetail />} />
             </Routes>
             <Footer />
             <Toaster />

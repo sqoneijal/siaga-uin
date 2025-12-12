@@ -1,6 +1,7 @@
 import { crudService } from "@/lib/crudService";
 import dompurify from "dompurify";
 import { decode } from "html-entities";
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 type Response = {
@@ -60,7 +61,9 @@ const Programs = () => {
                               className="text-gray-600 leading-relaxed"
                               dangerouslySetInnerHTML={{ __html: wordLimiter(stripTags(dompurify.sanitize(decode(item.content))), 30) }}
                            />
-                           <button className="mt-6 text-blue-600 font-semibold hover:text-blue-700 transition-colors">Pelajari Lebih Lanjut →</button>
+                           <Link to={`/program/${item?.id}`} className="mt-6 text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                              Pelajari Lebih Lanjut →
+                           </Link>
                         </CardContent>
                      </Card>
                   );

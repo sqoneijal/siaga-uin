@@ -1,10 +1,22 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { importantLinks } from "@/mockData";
+import { Card, CardContent } from "@/components/ui/card";
+import { crudService } from "@/lib/crudService";
 import { ArrowLeft, ExternalLink, Link as LinkIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+type Response = {
+   results: Array<Record<string, string>>;
+   total: number;
+};
+
 const ImportantLinks = () => {
    const navigate = useNavigate();
+
+   const { useList } = crudService("/informasi/link-penting?limit=999&offset=0");
+   const { data, isLoading } = useList<Response>();
+
+   if (isLoading) {
+      return <div>loading...</div>;
+   }
 
    return (
       <div className="min-h-screen bg-gray-50 pt-20">
@@ -39,58 +51,31 @@ const ImportantLinks = () => {
 
             {/* Links by Category */}
             <div className="space-y-6">
-               {importantLinks.map((linkGroup) => (
-                  <Card key={linkGroup.id}>
-                     <CardHeader className="bg-gray-50 border-b">
-                        <CardTitle className="text-xl">{linkGroup.category}</CardTitle>
-                     </CardHeader>
-                     <CardContent className="p-6">
-                        <div className="grid md:grid-cols-2 gap-4">
-                           {linkGroup.links.map((link, index) => (
+               <Card>
+                  <CardContent className="p-6">
+                     <div className="grid md:grid-cols-2 gap-4">
+                        {data?.results?.map((item) => {
+                           return (
                               <a
-                                 key={index}
-                                 href={link.url}
+                                 key={item.id}
+                                 href={item.link}
                                  target="_blank"
                                  rel="noopener noreferrer"
                                  className="group flex items-start p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md transition-all duration-200 hover:-translate-y-1">
                                  <div className="flex-1">
                                     <div className="flex items-center mb-2">
-                                       <h4 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">{link.name}</h4>
+                                       <h4 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">{item.nama}</h4>
                                        <ExternalLink className="w-4 h-4 ml-2 text-gray-400 group-hover:text-blue-600 transition-colors" />
                                     </div>
-                                    <p className="text-sm text-gray-600">{link.description}</p>
+                                    <p className="text-sm text-gray-600">{item.keterangan}</p>
                                  </div>
                               </a>
-                           ))}
-                        </div>
-                     </CardContent>
-                  </Card>
-               ))}
+                           );
+                        })}
+                     </div>
+                  </CardContent>
+               </Card>
             </div>
-
-            {/* Additional Help */}
-            <Card className="mt-8 bg-yellow-50 border-yellow-200">
-               <CardContent className="p-6">
-                  <h3 className="font-semibold text-gray-900 mb-3">Butuh Bantuan?</h3>
-                  <p className="text-gray-700 text-sm mb-4">
-                     Jika Anda mengalami kesulitan mengakses link di atas atau membutuhkan informasi tambahan, silakan hubungi:
-                  </p>
-                  <ul className="space-y-2 text-sm text-gray-700">
-                     <li className="flex items-start">
-                        <span className="text-blue-600 mr-2">•</span>
-                        <span>Helpdesk IT UINAR: helpdesk@UINAR.ac.id</span>
-                     </li>
-                     <li className="flex items-start">
-                        <span className="text-blue-600 mr-2">•</span>
-                        <span>ar-raniry peduli: senyar@UINAR.ac.id</span>
-                     </li>
-                     <li className="flex items-start">
-                        <span className="text-blue-600 mr-2">•</span>
-                        <span>Telepon: +62 651 7551234</span>
-                     </li>
-                  </ul>
-               </CardContent>
-            </Card>
          </div>
       </div>
    );
